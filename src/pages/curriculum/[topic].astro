@@ -1,0 +1,274 @@
+---
+import { allTopics } from '$lib/data/curriculum';
+import { getRelatedTopics, getSectionByTopicId, getTopicById } from '$lib/utils/curriculum';
+import Breadcrumbs from '../../components/base/Breadcrumbs.svelte';
+import VideoPlayer from '../../components/base/VideoPlayer.svelte';
+import Footer from '../../components/layout/Footer.svelte';
+import Header from '../../components/layout/Header.svelte';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+	// Generate paths for all topics in the curriculum
+	return allTopics.map((topic) => ({
+		params: { topic: topic.id },
+	}));
+}
+
+const { topic: topicId } = Astro.params;
+
+// Fetch topic data
+const topicData = getTopicById(topicId!);
+const section = getSectionByTopicId(topicId!);
+const relatedTopicsData = topicData ? getRelatedTopics(topicData) : [];
+
+// Redirect to curriculum if topic not found
+if (!topicData || !section) {
+	return Astro.redirect('/curriculum');
+}
+
+// Breadcrumb items
+const breadcrumbItems = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Curriculum', href: '/curriculum' },
+	{ label: section.title, href: '/curriculum' },
+	{ label: topicData.title },
+];
+
+// Helper to get section badge color
+function getSectionBadgeClass(sectionId: string): string {
+	if (sectionId.startsWith('core')) {
+		return 'bg-blue-100 text-blue-700';
+	}
+	if (sectionId.startsWith('pathway')) {
+		return 'bg-brand-mint/20 text-brand-navy';
+	}
+	return 'bg-gray-100 text-gray-700';
+}
+---
+
+<BaseLayout title={topicData.title} description={topicData.description}>
+	<Header slot="header" currentPath="/curriculum" client:load />
+
+	<!-- Breadcrumbs -->
+	<nav class="bg-gray-50 border-b border-gray-200 py-3">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<Breadcrumbs items={breadcrumbItems} client:idle />
+		</div>
+	</nav>
+
+	<!-- Topic Header -->
+	<section class="py-12 tablet:py-16 bg-white">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="max-w-4xl">
+				<!-- Section Badge -->
+				<div class="mb-4">
+					<span
+						class:list={[
+							'inline-block px-3 py-1 rounded-full text-xs font-semibold',
+							getSectionBadgeClass(topicData.section),
+						]}
+					>
+						{section.title}
+					</span>
+				</div>
+
+				<!-- Title -->
+				<h1 class="text-4xl tablet:text-5xl font-display font-bold text-brand-navy mb-4">
+					{topicData.title}
+				</h1>
+
+				<!-- Description -->
+				<p class="text-lg tablet:text-xl text-gray-600">
+					{topicData.description}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Video Section -->
+	<section class="py-12 bg-gray-50">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="max-w-4xl">
+				{
+					topicData.videos && topicData.videos.length > 0 ? (
+						<div class="space-y-6">
+							{topicData.videos.map((video) => (
+								<div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+									<VideoPlayer
+										videoId={video.youtubeId}
+										title={video.title}
+										client:idle
+									/>
+									<div class="p-4 border-t border-gray-200">
+										<h2 class="font-semibold text-brand-navy mb-2">{video.title}</h2>
+										<p class="text-sm text-gray-600">
+											Watch this industry video to see real-world applications of the concepts
+											covered in this topic.
+										</p>
+										{video.duration && (
+											<div class="text-xs text-gray-500 mt-2">
+												Duration: {video.duration}
+											</div>
+										)}
+									</div>
+								</div>
+							))}
+						</div>
+					) : (
+						<div class="bg-white rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+							<div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+								<svg
+									class="w-8 h-8 text-gray-400"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+									/>
+								</svg>
+							</div>
+							<h3 class="text-lg font-semibold text-gray-700 mb-2">Video Coming Soon</h3>
+							<p class="text-gray-500 max-w-md mx-auto">
+								We're working on adding industry video content for this topic. Check back soon!
+							</p>
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Content Section -->
+	<!-- TODO: Add actual topic content, learning objectives, activities, etc. -->
+	<section class="py-12 bg-white">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="max-w-4xl">
+				<h2 class="text-2xl tablet:text-3xl font-display font-bold text-brand-navy mb-6">
+					Learning Objectives
+				</h2>
+				<div class="prose prose-lg max-w-none">
+					<ul class="space-y-3">
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-brand-mint flex-shrink-0 mt-1"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<span class="text-gray-700">
+								Understand the fundamental principles and concepts related to this topic
+							</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-brand-mint flex-shrink-0 mt-1"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<span class="text-gray-700">
+								Apply theoretical knowledge through practical exercises and real-world scenarios
+							</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-brand-mint flex-shrink-0 mt-1"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<span class="text-gray-700">
+								Develop skills that are directly applicable in industry settings
+							</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Related Topics Section -->
+	{
+		relatedTopicsData.length > 0 && (
+			<section class="py-12 tablet:py-16 bg-gray-50">
+				<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+					<div class="mb-8">
+						<h2 class="text-2xl tablet:text-3xl font-display font-bold text-brand-navy">
+							Related Topics
+						</h2>
+						<p class="text-gray-600 mt-2">
+							Continue your learning journey with these related topics
+						</p>
+					</div>
+
+					<div class="grid gap-6 tablet:grid-cols-2 desktop:grid-cols-3">
+						{relatedTopicsData.map((related) => {
+							const relatedSection = getSectionByTopicId(related.id);
+							const hasVideo = related.videos && related.videos.length > 0;
+
+							return (
+								<a
+									href={`/curriculum/${related.id}`}
+									class="block p-6 bg-white rounded-lg border border-gray-200 card-hover"
+								>
+									<div class="flex items-start justify-between mb-3">
+										<h3 class="text-lg font-display font-bold text-brand-navy">
+											{related.title}
+										</h3>
+										{hasVideo && (
+											<div class="flex-shrink-0 w-8 h-8 bg-brand-mint/20 rounded-full flex items-center justify-center">
+												<svg
+													class="w-4 h-4 text-brand-navy"
+													fill="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path d="M8 5v14l11-7z" />
+												</svg>
+											</div>
+										)}
+									</div>
+									<div class="text-sm text-gray-500">{relatedSection?.title}</div>
+								</a>
+							);
+						})}
+					</div>
+
+					<div class="text-center mt-8">
+						<a
+							href="/curriculum"
+							class="inline-flex items-center gap-2 text-brand-navy font-semibold hover:text-brand-navy/80 transition-colors"
+						>
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M10 19l-7-7m0 0l7-7m-7 7h18"
+								/>
+							</svg>
+							Back to Curriculum Overview
+						</a>
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<Footer slot="footer" />
+</BaseLayout>

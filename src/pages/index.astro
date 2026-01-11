@@ -1,0 +1,58 @@
+---
+import Footer from '../components/layout/Footer.svelte';
+import Header from '../components/layout/Header.svelte';
+import Hero from '../components/sections/Hero.svelte';
+import PathwaySelector from '../components/sections/PathwaySelector.svelte';
+import StatsBar from '../components/sections/StatsBar.svelte';
+import Testimonials from '../components/sections/Testimonials.svelte';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sections } from '../lib/data/curriculum';
+import type { Pathway } from '../lib/types/curriculum';
+
+// Extract pathway sections and convert to Pathway objects
+const pathwaySections = sections.filter((s) => s.id.startsWith('pathway-'));
+const pathways: Pathway[] = pathwaySections.map((section) => ({
+	id: section.id,
+	title: section.title,
+	description: section.description,
+	videoCount: section.topics.reduce((count, topic) => count + (topic.videos?.length ?? 0), 0),
+	topics: section.topics,
+}));
+---
+
+<BaseLayout title="Engineering Education, Connected">
+	<!-- Header Slot -->
+	<Header slot="header" currentPath="/" client:load />
+
+	<!-- Hero Section -->
+	<Hero client:visible />
+
+	<!-- Stats Bar -->
+	<StatsBar />
+
+	<!-- Pathways Section -->
+	<section class="py-16 tablet:py-20 bg-white">
+		<div class="max-w-7xl mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
+					Choose Your Pathway
+				</h2>
+				<p class="text-lg text-gray-600 font-sans max-w-2xl mx-auto">
+					Select a specialist pathway to explore industry-connected curriculum content
+				</p>
+			</div>
+
+			<PathwaySelector
+				pathways={pathways}
+				featuredPathway="pathway-2"
+				client:visible
+			/>
+		</div>
+	</section>
+
+	<!-- Testimonials -->
+	<Testimonials />
+
+	<!-- Footer Slot -->
+	<Footer slot="footer" />
+</BaseLayout>

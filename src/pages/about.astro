@@ -1,0 +1,162 @@
+---
+import ParticleBackground from '../components/effects/ParticleBackground.svelte';
+import Footer from '../components/layout/Footer.svelte';
+import Header from '../components/layout/Header.svelte';
+import WhatWeDo from '../components/sections/WhatWeDo.svelte';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="About TLC"
+	description="TLC connects engineering education with real industry practice, bridging classrooms and shop floors for T-Level students and educators"
+>
+	<Header slot="header" currentPath="/about" client:load />
+
+	<!-- Hero Section with Particle Effect -->
+	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+		<section class="text-white py-16 tablet:py-24">
+			<div class="container mx-auto px-4 text-center">
+				<h1 class="text-4xl tablet:text-5xl desktop:text-6xl font-display font-bold mb-6">
+					Bridging Classrooms and Shop Floors
+				</h1>
+				<p class="text-xl tablet:text-2xl text-brand-mint font-sans max-w-3xl mx-auto">
+					TLC connects engineering education with real industry practice
+				</p>
+			</div>
+		</section>
+	</ParticleBackground>
+
+	<!-- Mission Section -->
+	<section class="py-16 tablet:py-20 bg-gray-50">
+		<div class="container mx-auto px-4 max-w-4xl">
+			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-6 text-center">
+				Our Mission
+			</h2>
+			<p class="text-lg tablet:text-xl text-gray-700 font-sans leading-relaxed text-center">
+				At TLC, we're committed to engineering excellence by bridging the gap between classroom
+				learning and real-world industry practice. We empower educators with authentic content,
+				connect students to meaningful career pathways, and help employers invest in the next
+				generation of skilled engineers.
+			</p>
+		</div>
+	</section>
+
+	<!-- What We Do Section - Interactive Hub -->
+	<WhatWeDo client:visible />
+
+	<!-- T-Levels Section -->
+	<section class="py-16 tablet:py-20 bg-brand-navy text-white">
+		<div class="container mx-auto px-4 max-w-5xl">
+			<h2 class="text-3xl tablet:text-4xl font-display font-bold mb-8 text-center">
+				About T-Levels
+			</h2>
+			<div class="text-lg tablet:text-xl font-sans leading-relaxed space-y-6">
+				<p>
+					T-Levels are 2-year technical qualifications designed to give students the skills
+					and knowledge needed to thrive in modern industry. They're an alternative to A-Levels
+					and combine classroom learning with extended industry placements.
+				</p>
+				<div class="grid tablet:grid-cols-2 gap-6 mt-8">
+					<div class="flex items-start gap-4">
+						<div class="w-2 h-2 bg-brand-mint rounded-full mt-2 flex-shrink-0"></div>
+						<div>
+							<h3 class="font-bold mb-2">Core Principles</h3>
+							<p class="text-gray-300">Strong foundation in essential engineering concepts and mathematics</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4">
+						<div class="w-2 h-2 bg-brand-mint rounded-full mt-2 flex-shrink-0"></div>
+						<div>
+							<h3 class="font-bold mb-2">Practical Skills</h3>
+							<p class="text-gray-300">Hands-on experience with real tools, materials, and manufacturing processes</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4">
+						<div class="w-2 h-2 bg-brand-mint rounded-full mt-2 flex-shrink-0"></div>
+						<div>
+							<h3 class="font-bold mb-2">Specialist Pathways</h3>
+							<p class="text-gray-300">Focus areas in mechanical, electrical, or manufacturing engineering</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4">
+						<div class="w-2 h-2 bg-brand-mint rounded-full mt-2 flex-shrink-0"></div>
+						<div>
+							<h3 class="font-bold mb-2">Industry Placement</h3>
+							<p class="text-gray-300">Minimum 315 hours working with real employers, applying skills in context</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Partners Section -->
+	<section class="py-16 tablet:py-20">
+		<div class="container mx-auto px-4 max-w-4xl text-center">
+			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-8">
+				Our Partners
+			</h2>
+			<div class="bg-white border-2 border-brand-mint rounded-lg p-8 inline-block">
+				<h3 class="text-2xl font-display font-bold text-brand-navy mb-4">
+					Launch Partner
+				</h3>
+				<a href="https://www.edc.ac.uk/" target="_blank" rel="noopener noreferrer" class="block">
+					<img
+						src="/edc-logo.jpg"
+						alt="East Durham College"
+						class="h-24 w-auto mx-auto hover:scale-105 transition-transform"
+					/>
+				</a>
+				<p class="text-lg text-gray-600 mt-4">
+					East Durham College
+				</p>
+			</div>
+			<p class="text-gray-600 mt-8 italic">
+				More partnerships coming soon
+			</p>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section class="py-16 tablet:py-20 bg-gray-50">
+		<div class="container mx-auto px-4 max-w-4xl text-center">
+			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-6">
+				Get In Touch
+			</h2>
+			<p class="text-lg text-gray-700 font-sans mb-8">
+				Whether you're a teacher looking for resources, an employer wanting to partner,
+				or a college interested in collaboration, we'd love to hear from you.
+			</p>
+			<div class="mb-8">
+				<a
+					href="mailto:info@tlc-learning.co.uk"
+					class="text-xl font-semibold text-brand-cyan hover:text-brand-navy transition-colors"
+				>
+					info@tlc-learning.co.uk
+				</a>
+			</div>
+			<div class="flex flex-col tablet:flex-row gap-4 justify-center">
+				<a
+					href="mailto:info@tlc-learning.co.uk?subject=Teacher Enquiry"
+					class="px-6 py-3 bg-brand-mint text-brand-navy font-semibold rounded-lg card-hover"
+				>
+					I'm a Teacher
+				</a>
+				<a
+					href="mailto:info@tlc-learning.co.uk?subject=Employer Partnership"
+					class="px-6 py-3 bg-brand-cyan text-white font-semibold rounded-lg card-hover"
+				>
+					I'm an Employer
+				</a>
+				<a
+					href="mailto:info@tlc-learning.co.uk?subject=College Partnership"
+					class="px-6 py-3 border-2 border-brand-navy text-brand-navy font-semibold rounded-lg card-hover"
+				>
+					I'm a College
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</BaseLayout>

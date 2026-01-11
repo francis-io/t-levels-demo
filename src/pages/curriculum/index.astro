@@ -1,0 +1,235 @@
+---
+import { curriculum, sections } from '$lib/data/curriculum';
+import { getPathways } from '$lib/utils/curriculum';
+import PathwayTopics from '../../components/curriculum/PathwayTopics.svelte';
+import ParticleBackground from '../../components/effects/ParticleBackground.svelte';
+import Footer from '../../components/layout/Footer.svelte';
+import Header from '../../components/layout/Header.svelte';
+import TopicCard from '../../components/trees/TopicCard.svelte';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Get curriculum stats
+const stats = {
+	topicCount: curriculum.totalTopics,
+	videoCount: curriculum.totalVideos,
+	pathwayCount: 3,
+};
+
+// Get pathway sections with all their data (including videos)
+const pathwaySections = getPathways();
+
+// Get core sections
+const coreKnowledgeSection = sections.find((s) => s.id === 'core-knowledge');
+const coreSkillsSection = sections.find((s) => s.id === 'core-skills');
+---
+
+<BaseLayout
+	title="T-Level Engineering Curriculum"
+	description="Explore the complete T-Level Engineering & Manufacturing curriculum with industry videos, hands-on projects, and learning pathways."
+>
+	<Header slot="header" currentPath="/curriculum" client:load />
+
+	<!-- Hero Section with Particle Effect -->
+	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+		<section class="text-white py-16 tablet:py-24">
+			<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+				<div class="text-center max-w-3xl mx-auto">
+					<h1 class="text-4xl tablet:text-5xl desktop:text-6xl font-display font-bold mb-6">
+						T-Level Engineering Curriculum
+					</h1>
+					<p class="text-lg tablet:text-xl text-gray-200 font-sans mb-8">
+						A comprehensive curriculum combining core engineering knowledge with specialized pathways
+						in maintenance, manufacturing, and design.
+					</p>
+				</div>
+
+				<!-- Stats Bar -->
+				<div class="grid grid-cols-3 gap-4 tablet:gap-8 max-w-2xl mx-auto mt-12">
+					<div class="text-center">
+						<div class="text-3xl tablet:text-4xl font-display font-bold text-brand-mint">
+							{stats.topicCount}
+						</div>
+						<div class="text-sm tablet:text-base text-gray-300 font-sans mt-2">Topics</div>
+					</div>
+					<div class="text-center">
+						<div class="text-3xl tablet:text-4xl font-display font-bold text-brand-mint">
+							{stats.videoCount}
+						</div>
+						<div class="text-sm tablet:text-base text-gray-300 font-sans mt-2">Videos</div>
+					</div>
+					<div class="text-center">
+						<div class="text-3xl tablet:text-4xl font-display font-bold text-brand-mint">
+							{stats.pathwayCount}
+						</div>
+						<div class="text-sm tablet:text-base text-gray-300 font-sans mt-2">Pathways</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</ParticleBackground>
+
+	<!-- Selected Pathway Topics Section (client-side for query param handling) -->
+	<PathwayTopics pathways={pathwaySections} client:load />
+
+	<!-- Core Knowledge Section -->
+	<section class="py-16 tablet:py-20 bg-gray-50">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="max-w-3xl">
+				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
+					Core Knowledge
+				</h2>
+				<p class="text-lg text-gray-600 mb-8">
+					{coreKnowledgeSection?.description}
+				</p>
+			</div>
+
+			<details open class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+				<summary
+					class="px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors font-semibold text-brand-navy flex items-center justify-between"
+				>
+					<span>View Core Knowledge Topics ({coreKnowledgeSection?.topics.length})</span>
+					<svg
+						class="w-5 h-5 transition-transform"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+						></path>
+					</svg>
+				</summary>
+				<div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+					<div class="grid gap-3 tablet:grid-cols-2">
+						{
+							coreKnowledgeSection?.topics.map((topic) => (
+								<TopicCard topic={topic} showDescription={false} client:idle />
+							))
+						}
+					</div>
+				</div>
+			</details>
+		</div>
+	</section>
+
+	<!-- Core Skills Section -->
+	<section class="py-16 tablet:py-20 bg-white">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="max-w-3xl">
+				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
+					Core Skills
+				</h2>
+				<p class="text-lg text-gray-600 mb-8">
+					{coreSkillsSection?.description}
+				</p>
+			</div>
+
+			<details open class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+				<summary
+					class="px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors font-semibold text-brand-navy flex items-center justify-between"
+				>
+					<span>View Core Skills Topics ({coreSkillsSection?.topics.length})</span>
+					<svg
+						class="w-5 h-5 transition-transform"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+						></path>
+					</svg>
+				</summary>
+				<div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+					<div class="grid gap-3 tablet:grid-cols-2">
+						{
+							coreSkillsSection?.topics.map((topic) => (
+								<TopicCard topic={topic} showDescription={false} client:idle />
+							))
+						}
+					</div>
+				</div>
+			</details>
+		</div>
+	</section>
+
+	<!-- Pathways Section -->
+	<section class="py-16 tablet:py-20 bg-gray-50">
+		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="text-center max-w-3xl mx-auto mb-12">
+				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
+					Choose Your Pathway
+				</h2>
+				<p class="text-lg text-gray-600">
+					Select a specialization pathway to focus your learning on specific industry applications.
+				</p>
+			</div>
+
+			<div class="grid gap-6 tablet:grid-cols-2 desktop:grid-cols-3">
+				{
+					pathwaySections.map((pathway, index) => {
+						const videoCount = pathway.topics.reduce(
+							(count, topic) => count + (topic.videos?.length ?? 0),
+							0
+						);
+						const isFeatured = pathway.id === 'pathway-2';
+
+						return (
+							<a
+								href={`/curriculum?pathway=${pathway.id}`}
+								class:list={[
+									'block p-6 rounded-lg border-2 card-hover relative',
+									isFeatured
+										? 'bg-white border-brand-mint shadow-lg ring-2 ring-brand-mint ring-offset-2'
+										: 'bg-white border-gray-200',
+								]}
+							>
+								{isFeatured && (
+									<div class="absolute -top-3 left-6 px-3 py-1 bg-brand-mint text-brand-navy text-xs font-bold rounded-full">
+										START HERE
+									</div>
+								)}
+								<h3 class="text-xl font-display font-bold text-brand-navy mb-2">
+									{pathway.title}
+								</h3>
+								<p class="text-gray-600 mb-4">{pathway.description}</p>
+								<div class="flex gap-4 text-sm text-gray-500">
+									<span>{pathway.topics.length} topics</span>
+									<span>•</span>
+									<span
+										class:list={[videoCount > 0 ? 'text-brand-mint font-semibold' : '']}
+									>
+										{videoCount} video{videoCount !== 1 ? 's' : ''}
+									</span>
+								</div>
+							</a>
+						);
+					})
+				}
+			</div>
+
+			<div class="text-center mt-12">
+				<p class="text-gray-500 text-sm">
+					Not sure where to start? We recommend beginning with the Manufacturing Engineering
+					pathway.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</BaseLayout>
+
+<style>
+	/* Expand/collapse arrow rotation */
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+
+	/* Smooth expansion animation */
+	details summary {
+		list-style: none;
+	}
+
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+</style>

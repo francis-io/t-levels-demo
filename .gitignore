@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Cache
+.cache/
+*.log
+
+# Claude cache (keep .claude/settings.json if exists)
+.claude/cache/
+.claude/tsc-cache/
+
+# Playwright
+test-results/
+playwright-report/

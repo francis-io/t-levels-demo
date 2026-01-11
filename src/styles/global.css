@@ -1,0 +1,154 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/titillium-web/400.css";
+@import "@fontsource/titillium-web/600.css";
+@import "@fontsource/titillium-web/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		/* Brand colors */
+		--color-brand-navy: #1e1b4b;
+		--color-brand-mint: #50e8a8;
+		--color-brand-cyan: #50d8e8;
+
+		/* Gradients */
+		--gradient-primary: linear-gradient(135deg, #50e8a8 0%, #50d8e8 100%);
+		--gradient-dark: linear-gradient(135deg, #1e1b4b 0%, #2d2a5a 100%);
+
+		/* Breakpoints */
+		--bp-mobile: 0px;
+		--bp-tablet: 768px;
+		--bp-desktop: 1024px;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply font-sans text-gray-900 antialiased;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-display;
+	}
+
+	/* Focus styles */
+	:focus-visible {
+		@apply outline-none ring-2 ring-brand-mint ring-offset-2;
+	}
+}
+
+@layer components {
+	/* Blueprint grid background */
+	.blueprint-grid {
+		background-image: linear-gradient(rgba(229, 231, 235, 0.5) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(229, 231, 235, 0.5) 1px, transparent 1px);
+		background-size: 32px 32px;
+	}
+
+	/* Connection line animation */
+	.connection-line {
+		stroke: var(--color-brand-mint);
+		stroke-width: 2;
+		stroke-dasharray: 8 4;
+		animation: flow 1s linear infinite;
+	}
+
+	/* Node pulse animation */
+	.node-pulse {
+		animation: node-pulse 2s ease-in-out infinite;
+	}
+
+	/* Card hover effect */
+	.card-hover {
+		@apply transition-all duration-200 ease-out;
+	}
+
+	.card-hover:hover {
+		@apply -translate-y-1;
+		box-shadow: 0 12px 24px -8px rgba(30, 27, 75, 0.15);
+	}
+
+	/* Skeleton loading */
+	.skeleton {
+		@apply animate-pulse bg-gray-200 rounded;
+	}
+}
+
+@layer utilities {
+	/* Text gradient */
+	.text-gradient {
+		@apply bg-clip-text text-transparent;
+		background-image: var(--gradient-primary);
+	}
+
+	/* Glow effect for nodes with video */
+	.glow-mint {
+		box-shadow: 0 0 12px rgba(80, 232, 168, 0.6);
+	}
+}
+
+/* Keyframes */
+@keyframes flow {
+	0% {
+		stroke-dashoffset: 100;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes node-pulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(80, 232, 168, 0.4);
+		transform: scale(1);
+	}
+	50% {
+		box-shadow: 0 0 0 8px rgba(80, 232, 168, 0);
+		transform: scale(1.05);
+	}
+}
+
+@keyframes count-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+/* View transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 200ms;
+	animation-timing-function: ease-out;
+}
