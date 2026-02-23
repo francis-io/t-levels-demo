@@ -16,10 +16,14 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 <a {href} class="block">
 	<article
 		data-featured={featured}
+		data-compact={compact}
 		class="
 	    pathway-card rounded-xl transition-all duration-300 cursor-pointer
-	    {compact ? 'border border-transparent bg-transparent p-0' : 'bg-white/95 p-6'}
-	    {featured ? 'border-2 border-brand-mint/70 shadow-[0_22px_45px_-28px_rgba(15,23,42,0.65)]' : 'border border-slate-200 shadow-[0_15px_32px_-26px_rgba(15,23,42,0.65)]'}
+	    {compact
+			? 'border border-transparent bg-transparent p-0 shadow-none'
+			: featured
+				? 'bg-white/95 p-6 border-2 border-brand-mint/70 shadow-[0_22px_45px_-28px_rgba(15,23,42,0.65)]'
+				: 'bg-white/95 p-6 border border-slate-200 shadow-[0_15px_32px_-26px_rgba(15,23,42,0.65)]'}
 	  "
 	>
 	{#if featured}
@@ -64,6 +68,10 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 	.pathway-card:hover {
 		transform: translateY(-2px);
 		box-shadow: 0 18px 32px -22px rgba(15, 23, 42, 0.55);
+	}
+
+	article[data-compact='true']:hover {
+		box-shadow: none;
 	}
 
 	article[data-featured='true']:hover {
