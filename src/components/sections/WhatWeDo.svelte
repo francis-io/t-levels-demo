@@ -98,7 +98,7 @@ function handleHover(id: SegmentId | null) {
 						<div
 							class="w-14 h-14 rounded-full flex items-center justify-center shadow-md border-2 {segment.color === 'mint' ? 'border-brand-mint bg-emerald-50' : segment.color === 'cyan' ? 'border-brand-cyan bg-cyan-50' : 'border-brand-navy bg-indigo-50'}"
 						>
-							<span class="text-2xl">{segment.icon}</span>
+							<span class="segment-icon text-2xl">{segment.icon}</span>
 						</div>
 						<div>
 							<h3 class="font-bold text-brand-navy text-lg">{segment.title}</h3>
@@ -209,7 +209,7 @@ function handleHover(id: SegmentId | null) {
 								? 'scale-110 shadow-xl'
 								: ''}"
 						>
-							<span class="text-2xl tablet:text-3xl">{segment.icon}</span>
+							<span class="segment-icon text-2xl tablet:text-3xl">{segment.icon}</span>
 						</div>
 						<div class="segment-label text-center">
 							<h3 class="font-bold text-brand-navy text-sm">{segment.title}</h3>
@@ -294,6 +294,12 @@ function handleHover(id: SegmentId | null) {
 		left: 50%;
 		transform: translateX(-50%);
 		white-space: nowrap;
+	}
+
+	.segment-icon {
+		display: inline-block;
+		line-height: 1;
+		font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
 	}
 
 	.connection-line {
