@@ -30,9 +30,9 @@ const coreSkillsSection = sections.find((s) => s.id === 'core-skills');
 	<Header slot="header" currentPath="/curriculum" client:load />
 
 	<!-- Hero Section with Particle Effect -->
-	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+	<ParticleBackground class="bg-[image:var(--gradient-hero)]" client:visible>
 		<section class="text-white py-16 tablet:py-24">
-			<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+			<div class="content-shell">
 				<div class="text-center max-w-3xl mx-auto">
 					<h1 class="text-4xl tablet:text-5xl desktop:text-6xl font-display font-bold mb-6">
 						T-Level Engineering Curriculum
@@ -72,8 +72,8 @@ const coreSkillsSection = sections.find((s) => s.id === 'core-skills');
 	<PathwayTopics pathways={pathwaySections} client:load />
 
 	<!-- Core Knowledge Section -->
-	<section class="py-16 tablet:py-20 bg-gray-50">
-		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell">
 			<div class="max-w-3xl">
 				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
 					Core Knowledge
@@ -112,8 +112,8 @@ const coreSkillsSection = sections.find((s) => s.id === 'core-skills');
 	</section>
 
 	<!-- Core Skills Section -->
-	<section class="py-16 tablet:py-20 bg-white">
-		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+	<section class="section-shell bg-surface-1">
+		<div class="content-shell">
 			<div class="max-w-3xl">
 				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
 					Core Skills
@@ -152,8 +152,8 @@ const coreSkillsSection = sections.find((s) => s.id === 'core-skills');
 	</section>
 
 	<!-- Pathways Section -->
-	<section class="py-16 tablet:py-20 bg-gray-50">
-		<div class="max-w-7xl mx-auto px-4 tablet:px-6">
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell">
 			<div class="text-center max-w-3xl mx-auto mb-12">
 				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
 					Choose Your Pathway

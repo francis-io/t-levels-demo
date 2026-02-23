@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/svelte';
-import Header from '../../src/components/layout/Header.svelte';
-import Footer from '../../src/components/layout/Footer.svelte';
-import MobileMenu from '../../src/components/layout/MobileMenu.svelte';
+import { fireEvent, render, screen } from '@testing-library/svelte';
+import { describe, expect, it, vi } from 'vitest';
 import Container from '../../src/components/layout/Container.svelte';
+import Footer from '../../src/components/layout/Footer.svelte';
+import Header from '../../src/components/layout/Header.svelte';
+import MobileMenu from '../../src/components/layout/MobileMenu.svelte';
 
 describe('Header', () => {
 	it('renders the logo image', () => {
@@ -15,20 +15,25 @@ describe('Header', () => {
 		render(Header);
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 
 	it('navigation links have correct hrefs', () => {
 		render(Header);
 		expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('href', '/');
-		expect(screen.getByRole('link', { name: /curriculum/i })).toHaveAttribute('href', '/curriculum?pathway=pathway-2');
+		expect(screen.getByRole('link', { name: /curriculum/i })).toHaveAttribute(
+			'href',
+			'/curriculum?pathway=pathway-2',
+		);
+		expect(screen.getByRole('link', { name: /lessons/i })).toHaveAttribute('href', '/lessons');
 		expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute('href', '/about');
 	});
 
-	it('highlights current page with brand-mint underline', () => {
+	it('highlights current page with active pill style', () => {
 		render(Header, { props: { currentPath: '/curriculum' } });
 		const curriculumLink = screen.getByRole('link', { name: /curriculum/i });
-		expect(curriculumLink.className).toContain('border-brand-mint');
+		expect(curriculumLink.className).toContain('bg-brand-navy');
 	});
 
 	it('renders mobile menu button', () => {
@@ -41,7 +46,7 @@ describe('Header', () => {
 		const { container } = render(Header);
 		const header = container.querySelector('header');
 		expect(header).toHaveClass('sticky');
-		expect(header).toHaveClass('backdrop-blur-sm');
+		expect(header).toHaveClass('backdrop-blur-md');
 	});
 });
 
@@ -55,6 +60,7 @@ describe('Footer', () => {
 		render(Footer);
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 
@@ -73,7 +79,7 @@ describe('Footer', () => {
 	it('has dark background styling', () => {
 		const { container } = render(Footer);
 		const footer = container.querySelector('footer');
-		expect(footer).toHaveClass('bg-gray-900');
+		expect(footer).toHaveClass('bg-slate-950');
 	});
 });
 
@@ -92,6 +98,7 @@ describe('MobileMenu', () => {
 		render(MobileMenu, { props: { isOpen: true } });
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 

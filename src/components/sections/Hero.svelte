@@ -21,7 +21,7 @@ const options = {
 	particleCount: 80,
 	colors: [
 		'rgba(80, 232, 168, 1)', // brand-mint
-		'rgba(80, 216, 232, 1)', // brand-cyan
+		'rgba(80, 232, 168, 0.65)', // muted mint accent
 		'rgba(255, 255, 255, 0.6)', // white accent
 	],
 	activeColor: 'rgba(255, 255, 255, 1)',
@@ -279,9 +279,12 @@ onMount(() => {
 </script>
 
 <section
-	class={`relative overflow-hidden bg-gradient-to-br from-brand-navy to-[#2D2A5A] ${className}`}
+	class={`relative overflow-hidden ${className}`}
 	bind:this={canvasContainer}
 >
+	<div class="absolute inset-0 bg-[image:var(--gradient-hero)]"></div>
+	<div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(80,232,168,0.22),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(80,216,232,0.2),transparent_38%)]"></div>
+
 	<!-- Particle Canvas -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<canvas
@@ -293,30 +296,43 @@ onMount(() => {
 	></canvas>
 
 	<!-- Hero Content -->
-	<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+	<div class="relative z-10 content-shell">
 		<div
-			class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[80vh] py-16 lg:py-0"
+			class="grid min-h-[88dvh] items-center gap-8 py-20 tablet:py-24"
 		>
-			<!-- Text Content -->
-			<div class="w-full lg:w-[55%] text-center lg:text-left space-y-6">
+			<div class="max-w-3xl space-y-7">
+				<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand-cyan tablet:text-sm">
+					Engineering Futures Platform
+				</p>
 				<h1
-					class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+					class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
 				>
 					Engineering Education,
 					<span class="text-brand-mint block">Connected</span>
 				</h1>
 
-				<p class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto lg:mx-0">
+				<p class="max-w-2xl text-lg text-slate-200 sm:text-xl md:text-2xl">
 					Explore the T-Level Engineering & Manufacturing curriculum with real industry videos
 				</p>
 
-				<!-- CTA Buttons -->
-				<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+				<div class="flex flex-wrap gap-3">
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						16 Core Knowledge Topics
+					</span>
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						3 Specialist Pathways
+					</span>
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						315 Placement Hours
+					</span>
+				</div>
+
+				<div class="flex flex-col gap-4 pt-4 sm:flex-row">
 					<Button
 						variant="primary"
 						size="lg"
 						href="/curriculum?pathway=pathway-2"
-						class="bg-brand-mint text-brand-navy hover:bg-opacity-90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all glow-mint-btn"
+						class="bg-brand-mint text-brand-navy shadow-md hover:bg-opacity-90 hover:shadow-lg active:translate-y-px"
 					>
 						Explore Curriculum
 					</Button>
@@ -325,16 +341,11 @@ onMount(() => {
 						variant="ghost"
 						size="lg"
 						href="/about"
-						class="border-2 border-white text-white hover:bg-white hover:!text-brand-navy"
+						class="border-2 border-white text-white hover:bg-white hover:!text-brand-navy active:translate-y-px"
 					>
 						Learn More
 					</Button>
 				</div>
-			</div>
-
-			<!-- Decorative Space -->
-			<div class="hidden lg:block w-[45%]" aria-hidden="true">
-				<!-- Particle animation fills this space -->
 			</div>
 		</div>
 	</div>
@@ -351,15 +362,6 @@ onMount(() => {
 		pointer-events: auto;
 	}
 
-	.glow-mint-btn {
-		box-shadow: 0 0 20px rgba(80, 232, 168, 0.4);
-	}
-
-	.glow-mint-btn:hover {
-		box-shadow: 0 0 30px rgba(80, 232, 168, 0.6);
-	}
-
-	/* Respect reduced motion */
 	@media (prefers-reduced-motion: reduce) {
 		.particle-canvas {
 			display: none;

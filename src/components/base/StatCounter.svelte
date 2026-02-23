@@ -81,8 +81,8 @@ onDestroy(() => {
 </script>
 
 <div bind:this={element} class="text-center">
-	<p class="text-4xl tablet:text-5xl font-display font-bold text-brand-mint">
+	<p class="text-4xl tablet:text-5xl font-display font-bold text-brand-navy">
 		{displayValue}{#if suffix}<span>{suffix}</span>{/if}
 	</p>
-	<p class="text-sm text-gray-400 uppercase tracking-wide mt-1">{label}</p>
+	<p class="mt-1 text-xs uppercase tracking-[0.14em] text-ink-500 tablet:text-sm">{label}</p>
 </div>

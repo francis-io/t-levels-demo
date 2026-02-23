@@ -8,33 +8,31 @@ interface Props {
 }
 
 const { pathways, featuredPathway = 'pathway-2' }: Props = $props();
+
+const featured = $derived(
+	pathways.find((pathway) => pathway.id === featuredPathway) ?? pathways[0],
+);
+const supporting = $derived(pathways.filter((pathway) => pathway.id !== featured?.id));
 </script>
 
 <section
 	data-testid="pathway-selector"
-	class="
-    grid gap-6
-    grid-cols-1 md:grid-cols-3
-    items-start
-  "
+	class="grid grid-cols-1 gap-6 desktop:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]"
 >
-	{#each pathways as pathway (pathway.id)}
-		<PathwayCard {pathway} featured={pathway.id === featuredPathway} />
-	{/each}
-</section>
+	{#if featured}
+		<PathwayCard pathway={featured} featured={true} />
+	{/if}
 
-<style>
-	/* Connection lines between pathways (desktop only) */
-	@media (min-width: 768px) {
-		section::before {
-			content: '';
-			position: absolute;
-			top: 50%;
-			left: 33%;
-			right: 33%;
-			height: 2px;
-			background: linear-gradient(90deg, #50e8a8, #50d8e8);
-			z-index: -1;
-		}
-	}
-</style>
+	<div
+		class="rounded-2xl border border-slate-200 bg-white/95 shadow-[0_20px_50px_-34px_rgba(15,23,42,0.6)]"
+		aria-label="Supporting pathways"
+	>
+		<div class="divide-y divide-slate-200">
+			{#each supporting as pathway (pathway.id)}
+				<div class="p-5 tablet:p-6">
+					<PathwayCard {pathway} compact={true} />
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>

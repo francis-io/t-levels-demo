@@ -19,7 +19,7 @@ const hasVideo = $derived((topic.videos?.length ?? 0) > 0);
 // Only show green/glow for topics with actual videos
 const nodeClass = $derived(() => {
 	if (topic.status === 'coming-soon') return 'bg-gray-200 cursor-not-allowed';
-	if (hasVideo) return 'bg-brand-mint glow-mint cursor-pointer';
+	if (hasVideo) return 'bg-brand-mint ring-1 ring-brand-mint/40 cursor-pointer';
 	return 'bg-gray-300 cursor-pointer'; // Active but no video
 });
 

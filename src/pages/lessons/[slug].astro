@@ -1,0 +1,28 @@
+---
+import Footer from '../../components/layout/Footer.svelte';
+import Header from '../../components/layout/Header.svelte';
+import LessonViewHost from '../../components/lessons/LessonViewHost.svelte';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLessonBySlug, getLessonSlugs } from '../../lib/utils/lessons';
+
+export function getStaticPaths() {
+	return getLessonSlugs().map((slug) => ({
+		params: { slug },
+	}));
+}
+
+const { slug } = Astro.params;
+const lesson = getLessonBySlug(slug ?? '');
+
+if (!lesson) {
+	return Astro.redirect('/lessons');
+}
+---
+
+<BaseLayout title={lesson.title} description={lesson.outcomes[0]}>
+	<Header slot="header" currentPath="/lessons" client:load />
+
+	<LessonViewHost lesson={lesson} client:load />
+
+	<Footer slot="footer" />
+</BaseLayout>

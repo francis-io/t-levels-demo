@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/svelte';
-import VideoPlayer from '../../src/components/base/VideoPlayer.svelte';
-import StatCounter from '../../src/components/base/StatCounter.svelte';
-import StatsBar from '../../src/components/sections/StatsBar.svelte';
+import { fireEvent, render, screen } from '@testing-library/svelte';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Breadcrumbs from '../../src/components/base/Breadcrumbs.svelte';
 import Skeleton from '../../src/components/base/Skeleton.svelte';
+import StatCounter from '../../src/components/base/StatCounter.svelte';
+import VideoPlayer from '../../src/components/base/VideoPlayer.svelte';
+import StatsBar from '../../src/components/sections/StatsBar.svelte';
 
 describe('VideoPlayer', () => {
 	it('renders play button before click', () => {
@@ -93,11 +93,11 @@ describe('StatCounter', () => {
 		expect(screen.getByText(/\+/)).toBeInTheDocument();
 	});
 
-	it('applies brand-mint color to number', () => {
+	it('applies brand-navy color to number', () => {
 		const { container } = render(StatCounter, {
 			props: { value: 56, label: 'Topics' },
 		});
-		const numberEl = container.querySelector('[class*="text-brand-mint"]');
+		const numberEl = container.querySelector('[class*="text-brand-navy"]');
 		expect(numberEl).toBeInTheDocument();
 	});
 
@@ -138,10 +138,11 @@ describe('StatsBar', () => {
 		expect(screen.getByText(/Placement Hours/i)).toBeInTheDocument();
 	});
 
-	it('has dark background', () => {
+	it('uses section shell layout classes', () => {
 		const { container } = render(StatsBar);
 		const section = container.firstElementChild;
-		expect(section).toHaveClass('bg-brand-navy');
+		expect(section).toHaveClass('section-shell');
+		expect(section).toHaveClass('py-0');
 	});
 
 	it('has responsive grid layout', () => {
@@ -212,10 +213,7 @@ describe('Breadcrumbs', () => {
 				],
 			},
 		});
-		expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute(
-			'href',
-			'/',
-		);
+		expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('href', '/');
 		expect(screen.getByRole('link', { name: /curriculum/i })).toHaveAttribute(
 			'href',
 			'/curriculum',

@@ -1,40 +1,41 @@
 {
-  "name": "t-levels-demo",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "lint": "biome lint ./src",
-    "format": "biome format --write ./src",
-    "check": "biome check ./src",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/svelte": "^7.0.0",
-    "@astrojs/tailwind": "^6.0.0",
-    "@fontsource-variable/inter": "^5.1.0",
-    "@fontsource/ibm-plex-mono": "^5.1.0",
-    "@fontsource/titillium-web": "^5.1.0",
-    "astro": "^5.0.0",
-    "nanostores": "^1.0.0",
-    "svelte": "^5.0.0",
-    "tailwindcss": "^3.4.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.0",
-    "@sveltejs/vite-plugin-svelte": "^5.1.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/svelte": "^5.2.0",
-    "@types/node": "^22.0.0",
-    "@vitest/coverage-v8": "^2.1.0",
-    "jsdom": "^25.0.0",
-    "typescript": "^5.7.0",
-    "vitest": "^2.1.0"
-  }
+	"name": "t-levels-demo",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "npm run check:lessons-coverage && astro build",
+		"preview": "astro preview",
+		"lint": "biome lint ./src",
+		"format": "biome format --write ./src",
+		"check": "biome check ./src",
+		"check:lessons-coverage": "node --experimental-strip-types scripts/verify-lessons-coverage.ts",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.2.0",
+		"@astrojs/svelte": "^7.0.0",
+		"@astrojs/tailwind": "^6.0.0",
+		"@fontsource-variable/inter": "^5.1.0",
+		"@fontsource/ibm-plex-mono": "^5.1.0",
+		"@fontsource/titillium-web": "^5.1.0",
+		"astro": "^5.0.0",
+		"nanostores": "^1.0.0",
+		"svelte": "^5.0.0",
+		"tailwindcss": "^3.4.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.0",
+		"@sveltejs/vite-plugin-svelte": "^5.1.1",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/svelte": "^5.2.0",
+		"@types/node": "^22.0.0",
+		"@vitest/coverage-v8": "^2.1.0",
+		"jsdom": "^25.0.0",
+		"typescript": "^5.7.0",
+		"vitest": "^2.1.0"
+	}
 }

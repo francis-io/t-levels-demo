@@ -1,0 +1,63 @@
+---
+import ParticleBackground from '../../components/effects/ParticleBackground.svelte';
+import Footer from '../../components/layout/Footer.svelte';
+import Header from '../../components/layout/Header.svelte';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLessons } from '../../lib/utils/lessons';
+
+const lessons = getLessons();
+---
+
+<BaseLayout title="Lessons" description="Interactive classroom lesson delivery modes for Lean 5S and 8 Wastes Walk sessions.">
+	<Header slot="header" currentPath="/lessons" client:load />
+
+	<ParticleBackground class="bg-[image:var(--gradient-hero)]" client:visible>
+		<section class="py-16 text-white tablet:py-24">
+			<div class="content-shell">
+				<div class="mx-auto max-w-3xl text-center">
+					<h1 class="mb-6 text-4xl font-display font-bold tablet:text-5xl desktop:text-6xl">
+						Lessons
+					</h1>
+					<p class="text-lg text-gray-200 tablet:text-xl">
+						Launch lesson delivery with 8 mode layouts, full source transcript fidelity, and classroom-ready timing guidance.
+					</p>
+				</div>
+			</div>
+		</section>
+	</ParticleBackground>
+
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell">
+			<div class="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+				<div class="divide-y divide-gray-200">
+			{lessons.map((lesson) => (
+					<a
+						href={`/lessons/${lesson.slug}?view=storyboard`}
+						class="group block px-5 py-5 transition-colors hover:bg-gray-50 tablet:px-7"
+					>
+						<div class="grid gap-3 tablet:grid-cols-[12rem_minmax(0,1fr)_9rem] tablet:items-center">
+							<div class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+								{lesson.durationMins} minutes
+							</div>
+							<div>
+								<h2 class="text-2xl font-display font-bold text-brand-navy group-hover:text-brand-mint">
+									{lesson.title}
+								</h2>
+								<p class="mt-1 text-sm text-gray-700">{lesson.audience}</p>
+								<p class="mt-2 text-sm text-gray-600">{lesson.outcomes[0]}</p>
+							</div>
+							<div class="justify-self-start tablet:justify-self-end">
+								<span class="inline-flex items-center rounded-full bg-brand-mint/15 px-3 py-1 text-sm font-semibold text-brand-navy">
+									Open lesson
+								</span>
+							</div>
+						</div>
+				</a>
+			))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</BaseLayout>

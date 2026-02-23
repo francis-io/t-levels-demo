@@ -13,13 +13,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	<Header slot="header" currentPath="/about" client:load />
 
 	<!-- Hero Section with Particle Effect -->
-	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+	<ParticleBackground class="bg-[image:var(--gradient-hero)]" client:visible>
 		<section class="text-white py-16 tablet:py-24">
-			<div class="container mx-auto px-4 text-center">
+			<div class="content-shell text-center">
 				<h1 class="text-4xl tablet:text-5xl desktop:text-6xl font-display font-bold mb-6">
 					Bridging Classrooms and Shop Floors
 				</h1>
-				<p class="text-xl tablet:text-2xl text-brand-mint font-sans max-w-3xl mx-auto">
+				<p class="text-xl tablet:text-2xl text-white font-sans max-w-3xl mx-auto">
 					TLC connects engineering education with real industry practice
 				</p>
 			</div>
@@ -27,8 +27,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	</ParticleBackground>
 
 	<!-- Mission Section -->
-	<section class="py-16 tablet:py-20 bg-gray-50">
-		<div class="container mx-auto px-4 max-w-4xl">
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell max-w-4xl">
 			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-6 text-center">
 				Our Mission
 			</h2>
@@ -45,8 +45,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	<WhatWeDo client:visible />
 
 	<!-- T-Levels Section -->
-	<section class="py-16 tablet:py-20 bg-brand-navy text-white">
-		<div class="container mx-auto px-4 max-w-5xl">
+	<section class="section-shell bg-brand-navy text-white">
+		<div class="content-shell max-w-5xl">
 			<h2 class="text-3xl tablet:text-4xl font-display font-bold mb-8 text-center">
 				About T-Levels
 			</h2>
@@ -91,8 +91,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	</section>
 
 	<!-- Partners Section -->
-	<section class="py-16 tablet:py-20">
-		<div class="container mx-auto px-4 max-w-4xl text-center">
+	<section class="section-shell">
+		<div class="content-shell max-w-4xl text-center">
 			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-8">
 				Our Partners
 			</h2>
@@ -118,8 +118,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	</section>
 
 	<!-- Contact Section -->
-	<section class="py-16 tablet:py-20 bg-gray-50">
-		<div class="container mx-auto px-4 max-w-4xl text-center">
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell max-w-4xl text-center">
 			<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-6">
 				Get In Touch
 			</h2>
