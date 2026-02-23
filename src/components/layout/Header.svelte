@@ -29,19 +29,21 @@ function isActive(href: string): boolean {
 }
 </script>
 
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-	<div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
+	<div class="content-shell flex h-20 items-center justify-between">
 		<!-- Logo -->
 		<a href="/" class="flex items-center gap-2">
 			<img src="/logo.png" alt="TLC" class="h-[60px] w-auto" />
 		</a>
 
 		<!-- Desktop Navigation -->
-		<nav class="hidden tablet:flex items-center gap-8" aria-label="Main navigation">
+		<nav class="hidden tablet:flex items-center gap-3" aria-label="Main navigation">
 			{#each navLinks as link}
 				<a
 					href={link.href}
-					class="text-gray-600 hover:text-brand-navy transition-colors py-2 border-b-2 {isActive(link.href) ? 'border-brand-mint text-brand-navy' : 'border-transparent'}"
+					class="rounded-full px-4 py-2 text-sm font-semibold tracking-wide transition-colors {isActive(link.href)
+						? 'bg-brand-navy text-white'
+						: 'text-ink-700 hover:bg-slate-100 hover:text-brand-navy'}"
 				>
 					{link.label}
 				</a>
@@ -51,7 +53,7 @@ function isActive(href: string): boolean {
 		<!-- Mobile Menu Button -->
 		<button
 			type="button"
-			class="tablet:hidden p-2 text-gray-600 hover:text-brand-navy"
+			class="tablet:hidden rounded-md p-2 text-ink-700 hover:bg-slate-100 hover:text-brand-navy"
 			onclick={toggleMobileMenu}
 			aria-label="Menu"
 			aria-expanded={mobileMenuOpen}

@@ -20,12 +20,12 @@ const {
 }: Props = $props();
 
 const baseClasses =
-	'font-semibold rounded-lg transition-all duration-200 inline-flex items-center justify-center card-hover';
+	'inline-flex items-center justify-center rounded-lg font-semibold tracking-wide transition-all duration-200 card-hover';
 
 const variantClasses = {
 	primary: 'bg-brand-mint text-brand-navy hover:bg-opacity-90',
 	secondary: 'border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white',
-	ghost: 'text-brand-navy hover:bg-gray-100',
+	ghost: 'text-brand-navy hover:bg-slate-100',
 };
 
 const sizeClasses = {

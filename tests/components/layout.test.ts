@@ -30,10 +30,10 @@ describe('Header', () => {
 		expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute('href', '/about');
 	});
 
-	it('highlights current page with brand-mint underline', () => {
+	it('highlights current page with active pill style', () => {
 		render(Header, { props: { currentPath: '/curriculum' } });
 		const curriculumLink = screen.getByRole('link', { name: /curriculum/i });
-		expect(curriculumLink.className).toContain('border-brand-mint');
+		expect(curriculumLink.className).toContain('bg-brand-navy');
 	});
 
 	it('renders mobile menu button', () => {
@@ -46,7 +46,7 @@ describe('Header', () => {
 		const { container } = render(Header);
 		const header = container.querySelector('header');
 		expect(header).toHaveClass('sticky');
-		expect(header).toHaveClass('backdrop-blur-sm');
+		expect(header).toHaveClass('backdrop-blur-md');
 	});
 });
 
@@ -79,7 +79,7 @@ describe('Footer', () => {
 	it('has dark background styling', () => {
 		const { container } = render(Footer);
 		const footer = container.querySelector('footer');
-		expect(footer).toHaveClass('bg-gray-900');
+		expect(footer).toHaveClass('bg-slate-950');
 	});
 });
 

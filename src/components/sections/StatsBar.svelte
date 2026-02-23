@@ -9,9 +9,11 @@ const stats = [
 ];
 </script>
 
-<section class="bg-brand-navy py-12 tablet:py-16">
-	<div class="max-w-7xl mx-auto px-4">
-		<div class="grid grid-cols-2 tablet:grid-cols-4 gap-8 tablet:gap-4">
+<section class="section-shell py-0">
+	<div class="content-shell">
+		<div
+			class="grid grid-cols-2 gap-6 rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,23,42,0.55)] backdrop-blur ring-1 ring-brand-mint/25 tablet:grid-cols-4 tablet:gap-4 tablet:p-7"
+		>
 			{#each stats as stat}
 				<StatCounter
 					value={stat.value}

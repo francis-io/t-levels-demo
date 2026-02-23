@@ -18,8 +18,8 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 		data-featured={featured}
 		class="
 	    pathway-card rounded-xl transition-all duration-300 cursor-pointer
-	    {compact ? 'border border-transparent bg-transparent p-0' : 'bg-white p-6'}
-	    {featured ? 'border-2 border-brand-mint/50 shadow-lg shadow-brand-navy/10' : 'border border-gray-200 shadow-sm'}
+	    {compact ? 'border border-transparent bg-transparent p-0' : 'bg-white/95 p-6'}
+	    {featured ? 'border-2 border-brand-mint/70 shadow-[0_22px_45px_-28px_rgba(15,23,42,0.65)]' : 'border border-slate-200 shadow-[0_15px_32px_-26px_rgba(15,23,42,0.65)]'}
 	  "
 	>
 	{#if featured}
@@ -33,10 +33,10 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 	{/if}
 
 	<h3 class="text-xl font-bold text-brand-navy">{pathway.title}</h3>
-	<p class="mt-2 text-gray-600 {compact ? 'text-sm' : ''}">{pathway.description}</p>
+	<p class="mt-2 text-ink-700 {compact ? 'text-sm' : ''}">{pathway.description}</p>
 
 	<div class="mt-4 flex items-center gap-2">
-		<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-sm text-gray-700">
+		<span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-1 text-sm text-ink-700">
 			{pathway.videoCount} videos
 		</span>
 	</div>
@@ -63,7 +63,7 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 
 	.pathway-card:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 10px 22px -14px rgba(30, 27, 75, 0.5);
+		box-shadow: 0 18px 32px -22px rgba(15, 23, 42, 0.55);
 	}
 
 	article[data-featured='true']:hover {

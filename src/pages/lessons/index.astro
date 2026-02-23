@@ -11,9 +11,9 @@ const lessons = getLessons();
 <BaseLayout title="Lessons" description="Interactive classroom lesson delivery modes for Lean 5S and 8 Wastes Walk sessions.">
 	<Header slot="header" currentPath="/lessons" client:load />
 
-	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+	<ParticleBackground class="bg-[var(--gradient-hero)]" client:visible>
 		<section class="py-16 text-white tablet:py-24">
-			<div class="mx-auto max-w-7xl px-4 tablet:px-6">
+			<div class="content-shell">
 				<div class="mx-auto max-w-3xl text-center">
 					<h1 class="mb-6 text-4xl font-display font-bold tablet:text-5xl desktop:text-6xl">
 						Lessons
@@ -26,8 +26,8 @@ const lessons = getLessons();
 		</section>
 	</ParticleBackground>
 
-	<section class="bg-gray-50 py-12 tablet:py-16">
-		<div class="mx-auto max-w-7xl px-4 tablet:px-6">
+	<section class="section-shell bg-surface-0">
+		<div class="content-shell">
 			<div class="overflow-hidden rounded-2xl border border-gray-200 bg-white">
 				<div class="divide-y divide-gray-200">
 			{lessons.map((lesson) => (

@@ -279,9 +279,12 @@ onMount(() => {
 </script>
 
 <section
-	class={`relative overflow-hidden bg-gradient-to-br from-brand-navy to-[#2D2A5A] ${className}`}
+	class={`relative overflow-hidden ${className}`}
 	bind:this={canvasContainer}
 >
+	<div class="absolute inset-0 bg-[var(--gradient-hero)]"></div>
+	<div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(80,232,168,0.22),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(80,216,232,0.2),transparent_38%)]"></div>
+
 	<!-- Particle Canvas -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<canvas
@@ -293,11 +296,14 @@ onMount(() => {
 	></canvas>
 
 	<!-- Hero Content -->
-	<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+	<div class="relative z-10 content-shell">
 		<div
-			class="grid min-h-[100dvh] items-center gap-8 py-16 lg:grid-cols-12 lg:gap-12 lg:py-0"
+			class="grid min-h-[88dvh] items-center gap-8 py-20 tablet:py-24"
 		>
-			<div class="space-y-6 lg:col-span-7">
+			<div class="max-w-3xl space-y-7">
+				<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand-cyan tablet:text-sm">
+					Engineering Futures Platform
+				</p>
 				<h1
 					class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
 				>
@@ -305,9 +311,21 @@ onMount(() => {
 					<span class="text-brand-mint block">Connected</span>
 				</h1>
 
-				<p class="max-w-2xl text-lg text-gray-200 sm:text-xl md:text-2xl">
+				<p class="max-w-2xl text-lg text-slate-200 sm:text-xl md:text-2xl">
 					Explore the T-Level Engineering & Manufacturing curriculum with real industry videos
 				</p>
+
+				<div class="flex flex-wrap gap-3">
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						16 Core Knowledge Topics
+					</span>
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						3 Specialist Pathways
+					</span>
+					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
+						315 Placement Hours
+					</span>
+				</div>
 
 				<div class="flex flex-col gap-4 pt-4 sm:flex-row">
 					<Button
@@ -327,26 +345,6 @@ onMount(() => {
 					>
 						Learn More
 					</Button>
-				</div>
-			</div>
-
-			<div class="lg:col-span-5">
-				<div class="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm">
-					<p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-mint">Classroom delivery</p>
-					<ul class="mt-4 space-y-4 text-sm text-gray-100">
-						<li class="border-b border-white/15 pb-4">
-							<span class="block text-white font-semibold">Storyboard Timeline</span>
-							<span>Guide each block minute-by-minute with structured teacher prompts.</span>
-						</li>
-						<li class="border-b border-white/15 pb-4">
-							<span class="block text-white font-semibold">Split-Screen Classroom</span>
-							<span>Run teacher notes and learner activities side-by-side in one view.</span>
-						</li>
-						<li>
-							<span class="block text-white font-semibold">Field Guide Mode</span>
-							<span>Deliver practical workshop actions with printable, lesson-ready detail.</span>
-						</li>
-					</ul>
 				</div>
 			</div>
 		</div>

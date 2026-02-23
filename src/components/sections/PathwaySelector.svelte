@@ -23,10 +23,13 @@ const supporting = $derived(pathways.filter((pathway) => pathway.id !== featured
 		<PathwayCard pathway={featured} featured={true} />
 	{/if}
 
-	<div class="rounded-xl border border-gray-200 bg-white" aria-label="Supporting pathways">
-		<div class="divide-y divide-gray-200">
+	<div
+		class="rounded-2xl border border-slate-200 bg-white/95 shadow-[0_20px_50px_-34px_rgba(15,23,42,0.6)]"
+		aria-label="Supporting pathways"
+	>
+		<div class="divide-y divide-slate-200">
 			{#each supporting as pathway (pathway.id)}
-				<div class="p-4 tablet:p-5">
+				<div class="p-5 tablet:p-6">
 					<PathwayCard {pathway} compact={true} />
 				</div>
 			{/each}

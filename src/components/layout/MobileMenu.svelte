@@ -16,6 +16,9 @@ const navLinks = [
 	{ href: '/about', label: 'About' },
 ];
 
+const prefersReducedMotion =
+	typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 function handleClose() {
 	onClose?.();
 }
@@ -31,8 +34,8 @@ function isActive(href: string): boolean {
 {#if isOpen}
 	<!-- Overlay -->
 	<div
-		class="fixed inset-0 bg-brand-navy/95 z-50"
-		transition:fade={{ duration: 200 }}
+		class="fixed inset-0 z-50 bg-brand-navy/95"
+		transition:fade={{ duration: prefersReducedMotion ? 0 : 200 }}
 		role="dialog"
 		aria-modal="true"
 		aria-label="Mobile menu"
@@ -52,7 +55,7 @@ function isActive(href: string): boolean {
 		<!-- Navigation -->
 		<nav
 			class="flex flex-col items-center justify-center h-full"
-			transition:fly={{ x: 100, duration: 300 }}
+			transition:fly={{ x: prefersReducedMotion ? 0 : 100, duration: prefersReducedMotion ? 0 : 300 }}
 			aria-label="Mobile navigation"
 		>
 			{#each navLinks as link}

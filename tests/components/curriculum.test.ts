@@ -259,7 +259,7 @@ describe('PathwayCard', () => {
 			render(PathwayCard, { props: { pathway: mockPathway, featured: true } });
 
 			const card = screen.getByRole('article');
-			expect(card).toHaveClass('border-brand-mint/50');
+			expect(card).toHaveClass('border-brand-mint/70');
 			expect(card).toHaveAttribute('data-featured', 'true');
 		});
 
@@ -273,7 +273,7 @@ describe('PathwayCard', () => {
 			render(PathwayCard, { props: { pathway: mockPathway, featured: false } });
 
 			const card = screen.getByRole('article');
-			expect(card).not.toHaveClass('border-brand-mint/50');
+			expect(card).not.toHaveClass('border-brand-mint/70');
 			expect(card).toHaveAttribute('data-featured', 'false');
 		});
 	});

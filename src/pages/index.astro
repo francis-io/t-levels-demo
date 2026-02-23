@@ -25,19 +25,22 @@ const pathways: Pathway[] = pathwaySections.map((section) => ({
 	<Header slot="header" currentPath="/" client:load />
 
 	<!-- Hero Section -->
-	<Hero client:visible />
-
-	<!-- Stats Bar -->
-	<StatsBar />
+	<section class="relative">
+		<Hero client:visible />
+		<div class="absolute inset-x-0 bottom-5 z-20">
+			<StatsBar />
+		</div>
+	</section>
 
 	<!-- Pathways Section -->
-	<section class="py-16 tablet:py-20 bg-white">
-		<div class="max-w-7xl mx-auto px-4">
-			<div class="text-center mb-12">
+	<section class="section-shell bg-[var(--gradient-surface)]">
+		<div class="content-shell">
+			<div class="mx-auto mb-12 max-w-3xl text-center">
+				<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-cyan">Pathway Explorer</p>
 				<h2 class="text-3xl tablet:text-4xl font-display font-bold text-brand-navy mb-4">
 					Choose Your Pathway
 				</h2>
-				<p class="text-lg text-gray-600 font-sans max-w-2xl mx-auto">
+				<p class="mx-auto max-w-2xl text-lg text-ink-700 font-sans">
 					Select a specialist pathway to explore industry-connected curriculum content
 				</p>
 			</div>
