@@ -13,7 +13,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	<Header slot="header" currentPath="/about" client:load />
 
 	<!-- Hero Section with Particle Effect -->
-	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+	<ParticleBackground class="bg-[var(--gradient-hero)]" client:visible>
 		<section class="text-white py-16 tablet:py-24">
 			<div class="content-shell text-center">
 				<h1 class="text-4xl tablet:text-5xl desktop:text-6xl font-display font-bold mb-6">
