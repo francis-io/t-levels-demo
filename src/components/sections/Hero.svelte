@@ -300,7 +300,7 @@ onMount(() => {
 		<div
 			class="grid min-h-[88dvh] items-center gap-8 py-20 tablet:py-24"
 		>
-			<div class="max-w-3xl space-y-7">
+			<div class="max-w-3xl -translate-y-[20%] space-y-7 sm:translate-y-0">
 				<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand-cyan tablet:text-sm">
 					Engineering Futures Platform
 				</p>
