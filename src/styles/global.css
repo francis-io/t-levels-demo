@@ -23,6 +23,7 @@
 		--bp-mobile: 0px;
 		--bp-tablet: 768px;
 		--bp-desktop: 1024px;
+		--header-height: 80px;
 	}
 
 	html {

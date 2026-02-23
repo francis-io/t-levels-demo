@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/svelte';
-import Header from '../../src/components/layout/Header.svelte';
-import Footer from '../../src/components/layout/Footer.svelte';
-import MobileMenu from '../../src/components/layout/MobileMenu.svelte';
+import { fireEvent, render, screen } from '@testing-library/svelte';
+import { describe, expect, it, vi } from 'vitest';
 import Container from '../../src/components/layout/Container.svelte';
+import Footer from '../../src/components/layout/Footer.svelte';
+import Header from '../../src/components/layout/Header.svelte';
+import MobileMenu from '../../src/components/layout/MobileMenu.svelte';
 
 describe('Header', () => {
 	it('renders the logo image', () => {
@@ -15,13 +15,18 @@ describe('Header', () => {
 		render(Header);
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 
 	it('navigation links have correct hrefs', () => {
 		render(Header);
 		expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('href', '/');
-		expect(screen.getByRole('link', { name: /curriculum/i })).toHaveAttribute('href', '/curriculum?pathway=pathway-2');
+		expect(screen.getByRole('link', { name: /curriculum/i })).toHaveAttribute(
+			'href',
+			'/curriculum?pathway=pathway-2',
+		);
+		expect(screen.getByRole('link', { name: /lessons/i })).toHaveAttribute('href', '/lessons');
 		expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute('href', '/about');
 	});
 
@@ -92,6 +97,7 @@ describe('MobileMenu', () => {
 		render(MobileMenu, { props: { isOpen: true } });
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 

@@ -12,6 +12,7 @@ const { isOpen, currentPath = '/', onClose }: Props = $props();
 const navLinks = [
 	{ href: '/', label: 'Home' },
 	{ href: '/curriculum', label: 'Curriculum' },
+	{ href: '/lessons', label: 'Lessons' },
 	{ href: '/about', label: 'About' },
 ];
 

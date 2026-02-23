@@ -11,6 +11,7 @@ let mobileMenuOpen = $state(false);
 const navLinks = [
 	{ href: '/', label: 'Home' },
 	{ href: '/curriculum?pathway=pathway-2', label: 'Curriculum' },
+	{ href: '/lessons', label: 'Lessons' },
 	{ href: '/about', label: 'About' },
 ];
 
