@@ -5,19 +5,22 @@ import TopicNode from './TopicNode.svelte';
 interface Props {
 	pathway: Pathway;
 	featured?: boolean;
+	compact?: boolean;
 }
 
-const { pathway, featured = false }: Props = $props();
+const { pathway, featured = false, compact = false }: Props = $props();
 
 const href = $derived(`/curriculum?pathway=${pathway.id}`);
 </script>
 
 <a {href} class="block">
 	<article
+		data-featured={featured}
 		class="
-    pathway-card bg-white rounded-xl p-6 shadow-md transition-all duration-300 cursor-pointer
-    {featured ? 'scale-105 glow-mint border-2 border-brand-mint' : 'border border-gray-200'}
-  "
+	    pathway-card rounded-xl transition-all duration-300 cursor-pointer
+	    {compact ? 'border border-transparent bg-transparent p-0' : 'bg-white p-6'}
+	    {featured ? 'border-2 border-brand-mint/50 shadow-lg shadow-brand-navy/10' : 'border border-gray-200 shadow-sm'}
+	  "
 	>
 	{#if featured}
 		<div class="mb-3">
@@ -30,25 +33,26 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 	{/if}
 
 	<h3 class="text-xl font-bold text-brand-navy">{pathway.title}</h3>
-	<p class="mt-2 text-gray-600">{pathway.description}</p>
+	<p class="mt-2 text-gray-600 {compact ? 'text-sm' : ''}">{pathway.description}</p>
 
 	<div class="mt-4 flex items-center gap-2">
-		<span class="inline-flex items-center px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-700">
+		<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-sm text-gray-700">
 			{pathway.videoCount} videos
 		</span>
 	</div>
 
-	<!-- Topic preview grid -->
-	<div class="mt-4 flex flex-wrap gap-2">
-		{#each pathway.topics.slice(0, 5) as topic (topic.id)}
-			<TopicNode {topic} size="sm" />
-		{/each}
-		{#if pathway.topics.length > 5}
-			<span class="w-8 h-8 flex items-center justify-center text-xs text-gray-500">
-				+{pathway.topics.length - 5}
-			</span>
-		{/if}
-	</div>
+	{#if !compact}
+		<div class="mt-4 flex flex-wrap gap-2">
+			{#each pathway.topics.slice(0, 5) as topic (topic.id)}
+				<TopicNode {topic} size="sm" />
+			{/each}
+			{#if pathway.topics.length > 5}
+				<span class="flex h-8 w-8 items-center justify-center text-xs text-gray-500">
+					+{pathway.topics.length - 5}
+				</span>
+			{/if}
+		</div>
+	{/if}
 </article>
 </a>
 
@@ -58,19 +62,15 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 	}
 
 	.pathway-card:hover {
-		transform: translateY(-8px) scale(1.02);
-		box-shadow:
-			0 20px 25px -5px rgba(0, 0, 0, 0.1),
-			0 10px 10px -5px rgba(0, 0, 0, 0.04),
-			0 0 0 3px rgba(80, 232, 168, 0.2);
+		transform: translateY(-2px);
+		box-shadow: 0 10px 22px -14px rgba(30, 27, 75, 0.5);
 	}
 
-	/* Featured card hover - slightly different since it's already scaled */
-	.pathway-card.glow-mint:hover {
-		transform: translateY(-8px) scale(1.08);
+	article[data-featured='true']:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 14px 26px -14px rgba(30, 27, 75, 0.45);
 	}
 
-	/* Respect reduced motion */
 	@media (prefers-reduced-motion: reduce) {
 		.pathway-card:hover {
 			transform: none;

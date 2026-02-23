@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/svelte';
-import { describe, it, expect, vi } from 'vitest';
-import type { Topic, Pathway } from '../../src/lib/types/curriculum';
+import { describe, expect, it, vi } from 'vitest';
+import type { Pathway, Topic } from '../../src/lib/types/curriculum';
 
+import PathwaySelector from '../../src/components/sections/PathwaySelector.svelte';
+import PathwayCard from '../../src/components/trees/PathwayCard.svelte';
+import TopicCard from '../../src/components/trees/TopicCard.svelte';
 // Import components (will fail until implemented)
 import TopicNode from '../../src/components/trees/TopicNode.svelte';
-import TopicCard from '../../src/components/trees/TopicCard.svelte';
-import PathwayCard from '../../src/components/trees/PathwayCard.svelte';
-import PathwaySelector from '../../src/components/sections/PathwaySelector.svelte';
 
 // Mock data for tests
 const mockActiveTopic: Topic = {
@@ -49,12 +49,12 @@ const mockPathway: Pathway = {
 // ===============================
 describe('TopicNode', () => {
 	describe('renders correct status styles', () => {
-		it('renders active topic with mint background and glow', () => {
+		it('renders active topic with mint background and ring', () => {
 			render(TopicNode, { props: { topic: mockActiveTopic } });
 
 			const node = screen.getByRole('link');
 			expect(node).toHaveClass('bg-brand-mint');
-			expect(node).toHaveClass('glow-mint');
+			expect(node).toHaveClass('ring-1');
 		});
 
 		it('renders placeholder topic without videos with gray background', () => {
@@ -255,12 +255,12 @@ describe('PathwayCard', () => {
 	});
 
 	describe('featured styling', () => {
-		it('has scale and glow when featured', () => {
+		it('has featured border styling when featured', () => {
 			render(PathwayCard, { props: { pathway: mockPathway, featured: true } });
 
 			const card = screen.getByRole('article');
-			expect(card).toHaveClass('scale-105');
-			expect(card).toHaveClass('glow-mint');
+			expect(card).toHaveClass('border-brand-mint/50');
+			expect(card).toHaveAttribute('data-featured', 'true');
 		});
 
 		it('shows Start Here badge when featured', () => {
@@ -273,8 +273,8 @@ describe('PathwayCard', () => {
 			render(PathwayCard, { props: { pathway: mockPathway, featured: false } });
 
 			const card = screen.getByRole('article');
-			expect(card).not.toHaveClass('scale-105');
-			expect(card).not.toHaveClass('glow-mint');
+			expect(card).not.toHaveClass('border-brand-mint/50');
+			expect(card).toHaveAttribute('data-featured', 'false');
 		});
 	});
 });
@@ -310,10 +310,9 @@ describe('PathwaySelector', () => {
 		it('highlights pathway-2 by default', () => {
 			render(PathwaySelector, { props: { pathways: mockPathways } });
 
-			// The pathway-2 card should have featured styling
-			const cards = screen.getAllByRole('article');
-			// Second card (index 1) should be featured
-			expect(cards[1]).toHaveClass('scale-105');
+			const featuredTitle = screen.getByText('Data Science');
+			const featuredCard = featuredTitle.closest('article');
+			expect(featuredCard).toHaveAttribute('data-featured', 'true');
 		});
 
 		it('highlights custom featured pathway', () => {
@@ -321,9 +320,9 @@ describe('PathwaySelector', () => {
 				props: { pathways: mockPathways, featuredPathway: 'pathway-3' },
 			});
 
-			const cards = screen.getAllByRole('article');
-			// Third card (index 2) should be featured
-			expect(cards[2]).toHaveClass('scale-105');
+			const featuredTitle = screen.getByText('Cybersecurity');
+			const featuredCard = featuredTitle.closest('article');
+			expect(featuredCard).toHaveAttribute('data-featured', 'true');
 		});
 	});
 });

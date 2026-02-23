@@ -27,7 +27,7 @@ const { lesson }: Props = $props();
 			<h2 class="text-base font-semibold text-brand-navy">Outcomes</h2>
 			<ul class="mt-2 space-y-2 text-sm text-gray-700">
 				{#each lesson.outcomes as outcome}
-					<li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-brand-cyan"></span><span>{outcome}</span></li>
+					<li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-brand-mint"></span><span>{outcome}</span></li>
 				{/each}
 			</ul>
 		</section>

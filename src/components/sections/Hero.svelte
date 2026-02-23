@@ -21,7 +21,7 @@ const options = {
 	particleCount: 80,
 	colors: [
 		'rgba(80, 232, 168, 1)', // brand-mint
-		'rgba(80, 216, 232, 1)', // brand-cyan
+		'rgba(80, 232, 168, 0.65)', // muted mint accent
 		'rgba(255, 255, 255, 0.6)', // white accent
 	],
 	activeColor: 'rgba(255, 255, 255, 1)',
@@ -293,30 +293,28 @@ onMount(() => {
 	></canvas>
 
 	<!-- Hero Content -->
-	<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+	<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div
-			class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[80vh] py-16 lg:py-0"
+			class="grid min-h-[100dvh] items-center gap-8 py-16 lg:grid-cols-12 lg:gap-12 lg:py-0"
 		>
-			<!-- Text Content -->
-			<div class="w-full lg:w-[55%] text-center lg:text-left space-y-6">
+			<div class="space-y-6 lg:col-span-7">
 				<h1
-					class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+					class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
 				>
 					Engineering Education,
 					<span class="text-brand-mint block">Connected</span>
 				</h1>
 
-				<p class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto lg:mx-0">
+				<p class="max-w-2xl text-lg text-gray-200 sm:text-xl md:text-2xl">
 					Explore the T-Level Engineering & Manufacturing curriculum with real industry videos
 				</p>
 
-				<!-- CTA Buttons -->
-				<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+				<div class="flex flex-col gap-4 pt-4 sm:flex-row">
 					<Button
 						variant="primary"
 						size="lg"
 						href="/curriculum?pathway=pathway-2"
-						class="bg-brand-mint text-brand-navy hover:bg-opacity-90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all glow-mint-btn"
+						class="bg-brand-mint text-brand-navy shadow-md hover:bg-opacity-90 hover:shadow-lg active:translate-y-px"
 					>
 						Explore Curriculum
 					</Button>
@@ -325,16 +323,31 @@ onMount(() => {
 						variant="ghost"
 						size="lg"
 						href="/about"
-						class="border-2 border-white text-white hover:bg-white hover:!text-brand-navy"
+						class="border-2 border-white text-white hover:bg-white hover:!text-brand-navy active:translate-y-px"
 					>
 						Learn More
 					</Button>
 				</div>
 			</div>
 
-			<!-- Decorative Space -->
-			<div class="hidden lg:block w-[45%]" aria-hidden="true">
-				<!-- Particle animation fills this space -->
+			<div class="lg:col-span-5">
+				<div class="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm">
+					<p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-mint">Classroom delivery</p>
+					<ul class="mt-4 space-y-4 text-sm text-gray-100">
+						<li class="border-b border-white/15 pb-4">
+							<span class="block text-white font-semibold">Storyboard Timeline</span>
+							<span>Guide each block minute-by-minute with structured teacher prompts.</span>
+						</li>
+						<li class="border-b border-white/15 pb-4">
+							<span class="block text-white font-semibold">Split-Screen Classroom</span>
+							<span>Run teacher notes and learner activities side-by-side in one view.</span>
+						</li>
+						<li>
+							<span class="block text-white font-semibold">Field Guide Mode</span>
+							<span>Deliver practical workshop actions with printable, lesson-ready detail.</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -351,15 +364,6 @@ onMount(() => {
 		pointer-events: auto;
 	}
 
-	.glow-mint-btn {
-		box-shadow: 0 0 20px rgba(80, 232, 168, 0.4);
-	}
-
-	.glow-mint-btn:hover {
-		box-shadow: 0 0 30px rgba(80, 232, 168, 0.6);
-	}
-
-	/* Respect reduced motion */
 	@media (prefers-reduced-motion: reduce) {
 		.particle-canvas {
 			display: none;

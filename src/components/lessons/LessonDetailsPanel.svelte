@@ -10,22 +10,22 @@ const { lesson, transcriptHref = '#full-source-transcript' }: Props = $props();
 </script>
 
 <aside class="rounded-xl border border-gray-200 bg-white p-5" aria-label="Lesson details panel">
-	<div class="mb-4 flex items-center justify-between">
+	<div class="mb-4 flex items-center justify-between border-b border-gray-200 pb-3">
 		<h2 class="text-lg font-semibold text-brand-navy">Details</h2>
-		<a href={transcriptHref} class="text-sm font-semibold text-brand-cyan hover:text-brand-navy">Full transcript</a>
+		<a href={transcriptHref} class="text-sm font-semibold text-brand-mint hover:text-brand-navy">Full transcript</a>
 	</div>
 
-	<div class="space-y-4">
+	<div class="divide-y divide-gray-200">
 		{#each lesson.blocks as block}
-			<section class="rounded-lg border border-gray-100 bg-gray-50 p-3">
+			<section class="py-4 first:pt-0">
 				<div class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
 					{block.startMin}-{block.endMin} min
 				</div>
 				<h3 class="text-sm font-semibold text-brand-navy">{block.title}</h3>
-				<div class="mt-2 grid gap-2 text-xs text-gray-700">
+				<div class="mt-2 grid gap-3 text-xs text-gray-700">
 					<div>
 						<p class="font-semibold text-gray-900">Teacher actions</p>
-						<ul class="list-disc pl-4">
+						<ul class="mt-1 list-disc pl-4">
 							{#each block.teacherActions as action}
 								<li>{action}</li>
 							{/each}
@@ -33,7 +33,7 @@ const { lesson, transcriptHref = '#full-source-transcript' }: Props = $props();
 					</div>
 					<div>
 						<p class="font-semibold text-gray-900">Learner actions</p>
-						<ul class="list-disc pl-4">
+						<ul class="mt-1 list-disc pl-4">
 							{#each block.learnerActions as action}
 								<li>{action}</li>
 							{/each}

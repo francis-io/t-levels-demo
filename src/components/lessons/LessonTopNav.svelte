@@ -15,8 +15,12 @@ const { lessonTitle, activeView, onViewChange, onPrint, onCopyLink }: Props = $p
 const labels: Record<ViewMode, string> = {
 	storyboard: 'Storyboard',
 	'split-screen': 'Split-Screen',
+	'mission-control': 'Mission Control',
 	route: 'Route',
+	simulator: 'Simulator',
 	'field-guide': 'Field Guide',
+	'card-deck': 'Card Deck',
+	scrollytelling: 'Scrollytelling',
 };
 
 const modes = viewModes;
@@ -96,7 +100,7 @@ $effect(() => {
 					onclick={() => selectView(mode)}
 					class="min-h-11 whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition-colors {activeView === mode
 						? 'border-brand-navy bg-brand-navy text-white'
-						: 'border-gray-300 bg-white text-gray-700 hover:border-brand-cyan hover:text-brand-navy'}"
+						: 'border-gray-300 bg-white text-gray-700 hover:border-brand-mint hover:text-brand-navy'}"
 				>
 					{labels[mode]}
 				</button>
