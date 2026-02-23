@@ -315,18 +315,6 @@ onMount(() => {
 					Explore the T-Level Engineering & Manufacturing curriculum with real industry videos
 				</p>
 
-				<div class="flex flex-wrap gap-3">
-					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
-						16 Core Knowledge Topics
-					</span>
-					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
-						3 Specialist Pathways
-					</span>
-					<span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm text-white/90">
-						315 Placement Hours
-					</span>
-				</div>
-
 				<div class="flex flex-col gap-4 pt-4 sm:flex-row">
 					<Button
 						variant="primary"
