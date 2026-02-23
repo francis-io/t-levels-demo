@@ -19,12 +19,8 @@ let announcement = $state('View changed to Storyboard.');
 const modeLabels: Record<ViewMode, string> = {
 	storyboard: 'Storyboard Timeline',
 	'split-screen': 'Split-Screen Classroom',
-	'mission-control': 'Mission Control Dashboard',
 	route: 'Choose-Your-Route',
-	simulator: 'Simulator',
 	'field-guide': 'Workshop Field Guide',
-	'card-deck': 'Card Deck Carousel',
-	scrollytelling: 'Scrollytelling Narrative',
 };
 
 function updateUrl(nextView: ViewMode, replace = false) {
@@ -68,10 +64,6 @@ function handlePrint() {
 	trackLessonEvent('lesson_print_clicked', { slug: lesson.slug, mode: activeView });
 }
 
-function handleReset() {
-	changeView('storyboard', true);
-}
-
 function normalizeInitialView() {
 	const url = new URL(window.location.href);
 	const queryView = url.searchParams.get('view');
@@ -109,7 +101,6 @@ $effect(() => {
 	onViewChange={(view) => changeView(view)}
 	onPrint={handlePrint}
 	onCopyLink={handleCopyLink}
-	onResetView={handleReset}
 />
 
 <div class="mx-auto mt-4 grid max-w-7xl gap-4 px-4 tablet:grid-cols-[1fr_24rem]" role="tabpanel" id={`lesson-panel-${activeView}`} aria-labelledby={`lesson-tab-${activeView}`}>
@@ -124,28 +115,12 @@ $effect(() => {
 			{#await import('./views/SplitScreenView.svelte') then module}
 				<module.default {lesson} />
 			{/await}
-		{:else if activeView === 'mission-control'}
-			{#await import('./views/MissionControlView.svelte') then module}
-				<module.default {lesson} />
-			{/await}
 		{:else if activeView === 'route'}
 			{#await import('./views/ChooseRouteView.svelte') then module}
 				<module.default {lesson} />
 			{/await}
-		{:else if activeView === 'simulator'}
-			{#await import('./views/SimulatorView.svelte') then module}
-				<module.default {lesson} />
-			{/await}
 		{:else if activeView === 'field-guide'}
 			{#await import('./views/FieldGuideView.svelte') then module}
-				<module.default {lesson} />
-			{/await}
-		{:else if activeView === 'card-deck'}
-			{#await import('./views/CardDeckView.svelte') then module}
-				<module.default {lesson} />
-			{/await}
-		{:else if activeView === 'scrollytelling'}
-			{#await import('./views/ScrollytellingView.svelte') then module}
 				<module.default {lesson} />
 			{/await}
 		{/if}

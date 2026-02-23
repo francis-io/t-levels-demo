@@ -9,11 +9,11 @@ describe('Lessons integration', () => {
 		window.history.replaceState({}, '', '/lessons/lean-5s');
 	});
 
-	it('renders all 8 mode tabs', async () => {
+	it('renders reduced mode tabs', async () => {
 		render(LessonViewHost, { props: { lesson: lessonsBySlug['lean-5s'] } });
 
 		await waitFor(() => {
-			expect(screen.getAllByRole('tab')).toHaveLength(8);
+			expect(screen.getAllByRole('tab')).toHaveLength(4);
 		});
 	});
 
@@ -37,11 +37,11 @@ describe('Lessons integration', () => {
 	it('updates URL when switching mode', async () => {
 		render(LessonViewHost, { props: { lesson: lessonsBySlug['lean-5s'] } });
 
-		const missionControl = await screen.findByRole('tab', { name: /mission control/i });
-		await fireEvent.click(missionControl);
+		const routeTab = await screen.findByRole('tab', { name: /route/i });
+		await fireEvent.click(routeTab);
 
 		await waitFor(() => {
-			expect(new URL(window.location.href).searchParams.get('view')).toBe('mission-control');
+			expect(new URL(window.location.href).searchParams.get('view')).toBe('route');
 		});
 	});
 

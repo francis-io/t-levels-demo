@@ -4,12 +4,12 @@ import { isValidViewMode, resolveInitialViewMode } from '../../src/lib/utils/les
 describe('Lesson view state resolver', () => {
 	it('prioritizes URL query view when valid', () => {
 		const mode = resolveInitialViewMode({
-			queryView: 'simulator',
+			queryView: 'split-screen',
 			storedView: 'route',
 			defaultView: 'storyboard',
 		});
 
-		expect(mode).toBe('simulator');
+		expect(mode).toBe('split-screen');
 	});
 
 	it('falls back to localStorage view when query is invalid', () => {
@@ -33,7 +33,8 @@ describe('Lesson view state resolver', () => {
 	});
 
 	it('validates known view mode values', () => {
-		expect(isValidViewMode('mission-control')).toBe(true);
+		expect(isValidViewMode('route')).toBe(true);
+		expect(isValidViewMode('mission-control')).toBe(false);
 		expect(isValidViewMode('bad')).toBe(false);
 	});
 });

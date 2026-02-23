@@ -8,20 +8,15 @@ interface Props {
 	onViewChange?: (view: ViewMode) => void;
 	onPrint?: () => void;
 	onCopyLink?: () => void;
-	onResetView?: () => void;
 }
 
-const { lessonTitle, activeView, onViewChange, onPrint, onCopyLink, onResetView }: Props = $props();
+const { lessonTitle, activeView, onViewChange, onPrint, onCopyLink }: Props = $props();
 
 const labels: Record<ViewMode, string> = {
 	storyboard: 'Storyboard',
 	'split-screen': 'Split-Screen',
-	'mission-control': 'Mission Control',
 	route: 'Route',
-	simulator: 'Simulator',
 	'field-guide': 'Field Guide',
-	'card-deck': 'Card Deck',
-	scrollytelling: 'Scrollytelling',
 };
 
 const modes = viewModes;
@@ -109,9 +104,8 @@ $effect(() => {
 		</div>
 
 		<div class="flex items-center gap-2 text-xs font-semibold">
-			<button type="button" class="rounded-md border border-gray-300 px-3 py-2 text-gray-700 hover:text-brand-navy" onclick={() => onPrint?.()}>Print</button>
 			<button type="button" class="rounded-md border border-gray-300 px-3 py-2 text-gray-700 hover:text-brand-navy" onclick={() => onCopyLink?.()}>Copy link</button>
-			<button type="button" class="rounded-md border border-gray-300 px-3 py-2 text-gray-700 hover:text-brand-navy" onclick={() => onResetView?.()}>Reset view</button>
+			<button type="button" class="rounded-md border border-gray-300 px-3 py-2 text-gray-700 hover:text-brand-navy" onclick={() => onPrint?.()}>Print</button>
 		</div>
 	</div>
 </div>

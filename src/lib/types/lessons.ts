@@ -1,13 +1,4 @@
-export const viewModes = [
-	'storyboard',
-	'split-screen',
-	'mission-control',
-	'route',
-	'simulator',
-	'field-guide',
-	'card-deck',
-	'scrollytelling',
-] as const;
+export const viewModes = ['storyboard', 'split-screen', 'route', 'field-guide'] as const;
 
 export type ViewMode = (typeof viewModes)[number];
 

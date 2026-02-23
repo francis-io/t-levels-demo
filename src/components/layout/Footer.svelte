@@ -2,6 +2,7 @@
 const navLinks = [
 	{ href: '/', label: 'Home' },
 	{ href: '/curriculum', label: 'Curriculum' },
+	{ href: '/lessons', label: 'Lessons' },
 	{ href: '/about', label: 'About' },
 ];
 </script>
@@ -11,7 +12,9 @@ const navLinks = [
 		<div class="flex flex-col tablet:flex-row items-center justify-between gap-4">
 			<!-- Logo -->
 			<a href="/" class="flex items-center gap-3">
-				<img src="/logo.png" alt="TLC" class="h-10 w-auto" />
+				<div class="rounded-md bg-gray-100 p-1.5">
+					<img src="/logo.png" alt="TLC" class="h-10 w-auto" />
+				</div>
 				<span class="text-sm text-gray-500 hidden tablet:inline">
 					Engineering Education, Connected
 				</span>
@@ -24,7 +27,6 @@ const navLinks = [
 						{link.label}
 					</a>
 				{/each}
-				<span class="text-gray-600">|</span>
 				<a href="mailto:info@tlc-learning.co.uk" class="text-sm hover:text-white transition-colors">
 					Contact
 				</a>

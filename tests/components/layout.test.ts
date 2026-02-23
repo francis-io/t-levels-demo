@@ -60,6 +60,7 @@ describe('Footer', () => {
 		render(Footer);
 		expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /curriculum/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /lessons/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
 	});
 

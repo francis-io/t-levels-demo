@@ -184,7 +184,7 @@ function handleHover(id: string | null) {
 				<!-- Teachers Node - Top (SVG: 200, 60 = 50%, 15%) -->
 				<div
 					class="absolute segment-node"
-					style="top: 15%; left: 50%; transform: translateX(-50%);"
+					style="top: 15%; left: 50%; transform: translate(-50%, -50%);"
 					role="button"
 					tabindex="0"
 					onmouseenter={() => handleHover('teachers')}
@@ -193,14 +193,14 @@ function handleHover(id: string | null) {
 					onblur={() => handleHover(null)}
 				>
 					<div
-						class="w-16 h-16 tablet:w-20 tablet:h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-mint transition-all duration-300 {activeSegment ===
+						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-mint transition-all duration-300 {activeSegment ===
 						'teachers'
 							? 'scale-110 shadow-xl'
 							: ''}"
 					>
 						<span class="text-2xl tablet:text-3xl">📚</span>
 					</div>
-					<div class="text-center mt-2">
+					<div class="segment-label text-center">
 						<h3 class="font-bold text-brand-navy text-sm">Teachers</h3>
 					</div>
 				</div>
@@ -217,14 +217,14 @@ function handleHover(id: string | null) {
 					onblur={() => handleHover(null)}
 				>
 					<div
-						class="w-16 h-16 tablet:w-20 tablet:h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-cyan transition-all duration-300 {activeSegment ===
+						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-cyan transition-all duration-300 {activeSegment ===
 						'employers'
 							? 'scale-110 shadow-xl'
 							: ''}"
 					>
 						<span class="text-2xl tablet:text-3xl">🏭</span>
 					</div>
-					<div class="text-center mt-2">
+					<div class="segment-label text-center">
 						<h3 class="font-bold text-brand-navy text-sm">Employers</h3>
 					</div>
 				</div>
@@ -241,14 +241,14 @@ function handleHover(id: string | null) {
 					onblur={() => handleHover(null)}
 				>
 					<div
-						class="w-16 h-16 tablet:w-20 tablet:h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-navy transition-all duration-300 {activeSegment ===
+						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-navy transition-all duration-300 {activeSegment ===
 						'students'
 							? 'scale-110 shadow-xl'
 							: ''}"
 					>
 						<span class="text-2xl tablet:text-3xl">🎓</span>
 					</div>
-					<div class="text-center mt-2">
+					<div class="segment-label text-center">
 						<h3 class="font-bold text-brand-navy text-sm">Students</h3>
 					</div>
 				</div>
@@ -302,6 +302,21 @@ function handleHover(id: string | null) {
 
 	.segment-node {
 		cursor: pointer;
+		width: 5rem;
+		height: 5rem;
+	}
+
+	.segment-circle {
+		width: 5rem;
+		height: 5rem;
+	}
+
+	.segment-label {
+		position: absolute;
+		top: calc(100% + 0.5rem);
+		left: 50%;
+		transform: translateX(-50%);
+		white-space: nowrap;
 	}
 
 	.connection-line {
