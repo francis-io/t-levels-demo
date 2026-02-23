@@ -1,4 +1,5 @@
 ---
+import ParticleBackground from '../../components/effects/ParticleBackground.svelte';
 import Footer from '../../components/layout/Footer.svelte';
 import Header from '../../components/layout/Header.svelte';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -10,14 +11,20 @@ const lessons = getLessons();
 <BaseLayout title="Lessons" description="Interactive classroom lesson delivery modes for Lean 5S and 8 Wastes Walk sessions.">
 	<Header slot="header" currentPath="/lessons" client:load />
 
-	<section class="bg-gradient-to-br from-brand-navy to-[#2D2A5A] py-16 text-white tablet:py-24">
-		<div class="mx-auto max-w-7xl px-4 text-center">
-			<h1 class="text-4xl font-display font-bold tablet:text-5xl">Lessons</h1>
-			<p class="mx-auto mt-4 max-w-3xl text-lg text-gray-200">
-				Launch lesson delivery with 8 mode layouts, full source transcript fidelity, and classroom-ready timing guidance.
-			</p>
-		</div>
-	</section>
+	<ParticleBackground class="bg-gradient-to-br from-brand-navy to-[#2D2A5A]" client:visible>
+		<section class="py-16 text-white tablet:py-24">
+			<div class="mx-auto max-w-7xl px-4 tablet:px-6">
+				<div class="mx-auto max-w-3xl text-center">
+					<h1 class="mb-6 text-4xl font-display font-bold tablet:text-5xl desktop:text-6xl">
+						Lessons
+					</h1>
+					<p class="text-lg text-gray-200 tablet:text-xl">
+						Launch lesson delivery with 8 mode layouts, full source transcript fidelity, and classroom-ready timing guidance.
+					</p>
+				</div>
+			</div>
+		</section>
+	</ParticleBackground>
 
 	<section class="bg-gray-50 py-12 tablet:py-16">
 		<div class="mx-auto grid max-w-7xl gap-4 px-4 tablet:grid-cols-2">
