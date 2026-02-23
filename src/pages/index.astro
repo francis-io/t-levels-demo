@@ -27,10 +27,14 @@ const pathways: Pathway[] = pathwaySections.map((section) => ({
 	<!-- Hero Section -->
 	<section class="relative">
 		<Hero client:visible />
-		<div class="absolute inset-x-0 bottom-5 z-20">
+		<div class="absolute inset-x-0 bottom-5 z-20 hidden tablet:block">
 			<StatsBar />
 		</div>
 	</section>
+
+	<div class="tablet:hidden">
+		<StatsBar />
+	</div>
 
 	<!-- Pathways Section -->
 	<section class="section-shell bg-[var(--gradient-surface)]">
