@@ -1,7 +1,22 @@
 <script lang="ts">
-let activeSegment = $state<string | null>(null);
+type SegmentColor = 'mint' | 'cyan' | 'navy';
+type SegmentId = 'teachers' | 'employers' | 'students';
 
-const segments = [
+interface Segment {
+	id: SegmentId;
+	title: string;
+	subtitle: string;
+	description: string;
+	icon: string;
+	color: SegmentColor;
+	x: number;
+	y: number;
+	pulseDuration: string;
+}
+
+let activeSegment = $state<SegmentId | null>(null);
+
+const segments: Segment[] = [
 	{
 		id: 'teachers',
 		title: 'Teachers',
@@ -9,8 +24,10 @@ const segments = [
 		description:
 			'Access curated video content aligned with the T-Level curriculum. Save time on content creation and inspire students with authentic engineering experiences.',
 		icon: '📚',
-		angle: 0,
 		color: 'mint',
+		x: 200,
+		y: 48,
+		pulseDuration: '2s',
 	},
 	{
 		id: 'employers',
@@ -19,8 +36,10 @@ const segments = [
 		description:
 			'Invest in education by funding content creation, showcase your organization to future talent, and help shape the next generation of skilled engineers.',
 		icon: '🏭',
-		angle: 120,
 		color: 'cyan',
+		x: 320,
+		y: 318,
+		pulseDuration: '2.5s',
 	},
 	{
 		id: 'students',
@@ -29,12 +48,28 @@ const segments = [
 		description:
 			'Connect classroom learning to exciting career paths, see real engineers at work, and prepare for your industry placement with confidence.',
 		icon: '🎓',
-		angle: 240,
 		color: 'navy',
+		x: 80,
+		y: 318,
+		pulseDuration: '2.2s',
 	},
 ];
 
-function handleHover(id: string | null) {
+const centerPoint = { x: 200, y: 200 };
+
+const gradientByColor = {
+	mint: 'line-grad-mint',
+	cyan: 'line-grad-cyan',
+	navy: 'line-grad-navy',
+} as const;
+
+const fillByColor = {
+	mint: '#50E8A8',
+	cyan: '#50D8E8',
+	navy: '#1E1B4B',
+} as const;
+
+function handleHover(id: SegmentId | null) {
 	activeSegment = id;
 }
 </script>
@@ -83,12 +118,13 @@ function handleHover(id: string | null) {
 		</div>
 
 		<!-- Radial Hub Design (Tablet+) -->
-		<div class="hidden tablet:block relative max-w-4xl mx-auto">
+		<div class="hidden tablet:block">
+			<div class="hub-visual relative mx-auto">
 			<!-- SVG Connection Lines -->
 			<svg
 				class="absolute inset-0 w-full h-full pointer-events-none"
 				viewBox="0 0 400 400"
-				preserveAspectRatio="xMidYMid meet"
+				preserveAspectRatio="none"
 			>
 				<defs>
 					<linearGradient id="line-grad-mint" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -109,55 +145,31 @@ function handleHover(id: string | null) {
 				</defs>
 
 				<!-- Connection lines from center to each node -->
-				<line
-					x1="200"
-					y1="200"
-					x2="200"
-					y2="60"
-					stroke="url(#line-grad-mint)"
-					stroke-width="2"
-					class="connection-line {activeSegment === 'teachers' ? 'active' : ''}"
-				/>
-				<line
-					x1="200"
-					y1="200"
-					x2="320"
-					y2="300"
-					stroke="url(#line-grad-cyan)"
-					stroke-width="2"
-					class="connection-line {activeSegment === 'employers' ? 'active' : ''}"
-				/>
-				<line
-					x1="200"
-					y1="200"
-					x2="80"
-					y2="300"
-					stroke="url(#line-grad-navy)"
-					stroke-width="2"
-					class="connection-line {activeSegment === 'students' ? 'active' : ''}"
-				/>
+				{#each segments as segment}
+					<line
+						x1={centerPoint.x}
+						y1={centerPoint.y}
+						x2={segment.x}
+						y2={segment.y}
+						stroke={`url(#${gradientByColor[segment.color]})`}
+						stroke-width="2"
+						class="connection-line {activeSegment === segment.id ? 'active' : ''}"
+					/>
+				{/each}
 
 				<!-- Animated pulses along lines -->
-				<circle r="4" fill="#50E8A8" class="pulse-dot pulse-1">
-					<animateMotion dur="2s" repeatCount="indefinite">
-						<mpath href="#path-teachers" />
-					</animateMotion>
-				</circle>
-				<circle r="4" fill="#50D8E8" class="pulse-dot pulse-2">
-					<animateMotion dur="2.5s" repeatCount="indefinite">
-						<mpath href="#path-employers" />
-					</animateMotion>
-				</circle>
-				<circle r="4" fill="#1E1B4B" class="pulse-dot pulse-3">
-					<animateMotion dur="2.2s" repeatCount="indefinite">
-						<mpath href="#path-students" />
-					</animateMotion>
-				</circle>
+				{#each segments as segment}
+					<circle r="4" fill={fillByColor[segment.color]} class="pulse-dot">
+						<animateMotion dur={segment.pulseDuration} repeatCount="indefinite">
+							<mpath href={`#path-${segment.id}`} />
+						</animateMotion>
+					</circle>
+				{/each}
 
 				<!-- Hidden paths for animation -->
-				<path id="path-teachers" d="M200,200 L200,60" fill="none" />
-				<path id="path-employers" d="M200,200 L320,300" fill="none" />
-				<path id="path-students" d="M200,200 L80,300" fill="none" />
+				{#each segments as segment}
+					<path id={`path-${segment.id}`} d={`M${centerPoint.x},${centerPoint.y} L${segment.x},${segment.y}`} fill="none" />
+				{/each}
 
 				<!-- Outer ring -->
 				<circle
@@ -173,7 +185,7 @@ function handleHover(id: string | null) {
 			</svg>
 
 			<!-- Central Hub -->
-			<div class="relative h-[400px]">
+			<div class="relative h-full w-full">
 				<!-- Center TLC Logo -->
 				<div
 					class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 tablet:w-28 tablet:h-28 bg-white rounded-full flex items-center justify-center shadow-xl hub-center border-4 border-brand-navy"
@@ -181,77 +193,30 @@ function handleHover(id: string | null) {
 					<img src="/logo.png" alt="TLC" class="w-16 h-16 tablet:w-20 tablet:h-20 object-contain" />
 				</div>
 
-				<!-- Teachers Node - Top (SVG: 200, 60 = 50%, 15%) -->
-				<div
-					class="absolute segment-node"
-					style="top: 15%; left: 50%; transform: translate(-50%, -50%);"
-					role="button"
-					tabindex="0"
-					onmouseenter={() => handleHover('teachers')}
-					onmouseleave={() => handleHover(null)}
-					onfocus={() => handleHover('teachers')}
-					onblur={() => handleHover(null)}
-				>
+				{#each segments as segment}
 					<div
-						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-mint transition-all duration-300 {activeSegment ===
-						'teachers'
-							? 'scale-110 shadow-xl'
-							: ''}"
+						class="absolute segment-node"
+						style={`top: ${(segment.y / 400) * 100}%; left: ${(segment.x / 400) * 100}%; transform: translate(-50%, -50%);`}
+						role="button"
+						tabindex="0"
+						onmouseenter={() => handleHover(segment.id)}
+						onmouseleave={() => handleHover(null)}
+						onfocus={() => handleHover(segment.id)}
+						onblur={() => handleHover(null)}
 					>
-						<span class="text-2xl tablet:text-3xl">📚</span>
+						<div
+							class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 {segment.color === 'mint' ? 'border-brand-mint' : segment.color === 'cyan' ? 'border-brand-cyan' : 'border-brand-navy'} transition-all duration-300 {activeSegment === segment.id
+								? 'scale-110 shadow-xl'
+								: ''}"
+						>
+							<span class="text-2xl tablet:text-3xl">{segment.icon}</span>
+						</div>
+						<div class="segment-label text-center">
+							<h3 class="font-bold text-brand-navy text-sm">{segment.title}</h3>
+						</div>
 					</div>
-					<div class="segment-label text-center">
-						<h3 class="font-bold text-brand-navy text-sm">Teachers</h3>
-					</div>
-				</div>
-
-				<!-- Employers Node - Bottom Right (SVG: 320, 300 = 80%, 75%) -->
-				<div
-					class="absolute segment-node"
-					style="top: 75%; left: 80%; transform: translate(-50%, -50%);"
-					role="button"
-					tabindex="0"
-					onmouseenter={() => handleHover('employers')}
-					onmouseleave={() => handleHover(null)}
-					onfocus={() => handleHover('employers')}
-					onblur={() => handleHover(null)}
-				>
-					<div
-						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-cyan transition-all duration-300 {activeSegment ===
-						'employers'
-							? 'scale-110 shadow-xl'
-							: ''}"
-					>
-						<span class="text-2xl tablet:text-3xl">🏭</span>
-					</div>
-					<div class="segment-label text-center">
-						<h3 class="font-bold text-brand-navy text-sm">Employers</h3>
-					</div>
-				</div>
-
-				<!-- Students Node - Bottom Left (SVG: 80, 300 = 20%, 75%) -->
-				<div
-					class="absolute segment-node"
-					style="top: 75%; left: 20%; transform: translate(-50%, -50%);"
-					role="button"
-					tabindex="0"
-					onmouseenter={() => handleHover('students')}
-					onmouseleave={() => handleHover(null)}
-					onfocus={() => handleHover('students')}
-					onblur={() => handleHover(null)}
-				>
-					<div
-						class="segment-circle bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-navy transition-all duration-300 {activeSegment ===
-						'students'
-							? 'scale-110 shadow-xl'
-							: ''}"
-					>
-						<span class="text-2xl tablet:text-3xl">🎓</span>
-					</div>
-					<div class="segment-label text-center">
-						<h3 class="font-bold text-brand-navy text-sm">Students</h3>
-					</div>
-				</div>
+				{/each}
+			</div>
 			</div>
 		</div>
 
@@ -282,6 +247,18 @@ function handleHover(id: string | null) {
 </section>
 
 <style>
+	.hub-visual {
+		width: 420px;
+		height: 420px;
+	}
+
+	@media (min-width: 1280px) {
+		.hub-visual {
+			width: 460px;
+			height: 460px;
+		}
+	}
+
 	.hub-center {
 		animation: hub-pulse 3s ease-in-out infinite;
 	}
