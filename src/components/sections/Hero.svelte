@@ -279,10 +279,11 @@ onMount(() => {
 </script>
 
 <section
-	class={`relative overflow-hidden ${className}`}
+	class={`relative isolate overflow-hidden ${className}`}
 	bind:this={canvasContainer}
 >
-	<div class="absolute inset-0 bg-[var(--gradient-hero)]"></div>
+	<div class="absolute inset-0 -z-10 bg-[var(--gradient-hero)]"></div>
+	<div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_20%,rgba(80,232,168,0.14),transparent_42%),radial-gradient(circle_at_85%_14%,rgba(80,216,232,0.12),transparent_38%)]"></div>
 
 	<!-- Particle Canvas -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
