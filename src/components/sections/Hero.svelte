@@ -341,7 +341,7 @@ onMount(() => {
 						variant="ghost"
 						size="lg"
 						href="/about"
-						class="border-2 border-white text-white hover:bg-white hover:!text-brand-navy active:translate-y-px"
+						class="hidden border-2 border-white text-white hover:bg-white hover:!text-brand-navy active:translate-y-px sm:inline-flex"
 					>
 						Learn More
 					</Button>
