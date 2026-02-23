@@ -18,11 +18,8 @@ const href = $derived(`/curriculum?pathway=${pathway.id}`);
 		data-featured={featured}
 		class="
 	    pathway-card rounded-xl transition-all duration-300 cursor-pointer
-	    {compact
-			? 'border-0 bg-transparent p-0 shadow-none'
-			: featured
-				? 'bg-white/95 p-6 border-2 border-brand-mint/70 shadow-[0_22px_45px_-28px_rgba(15,23,42,0.65)]'
-				: 'bg-white/95 p-6 border border-slate-200 shadow-[0_15px_32px_-26px_rgba(15,23,42,0.65)]'}
+	    {compact ? 'border border-transparent bg-transparent p-0' : 'bg-white/95 p-6'}
+	    {featured ? 'border-2 border-brand-mint/70 shadow-[0_22px_45px_-28px_rgba(15,23,42,0.65)]' : 'border border-slate-200 shadow-[0_15px_32px_-26px_rgba(15,23,42,0.65)]'}
 	  "
 	>
 	{#if featured}

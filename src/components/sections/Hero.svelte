@@ -283,6 +283,7 @@ onMount(() => {
 	bind:this={canvasContainer}
 >
 	<div class="absolute inset-0 bg-[var(--gradient-hero)]"></div>
+	<div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(80,232,168,0.22),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(80,216,232,0.2),transparent_38%)]"></div>
 
 	<!-- Particle Canvas -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
