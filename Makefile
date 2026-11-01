@@ -2,39 +2,39 @@
 
 # Install dependencies
 install:
-	npm install
+	bun install
 
 # Development server
 dev:
-	npm run dev
+	bun run dev
 
 # Production build
 build:
-	npm run build
+	bun run build
 
 # Preview production build
 preview:
-	npm run preview
+	bun run preview
 
 # Lint code
 lint:
-	npm run lint
+	bun run lint
 
 # Format code
 format:
-	npm run format
+	bun run format
 
 # Check (lint + format)
 check:
-	npm run check
+	bun run check
 
 # Run unit tests
 test:
-	npm run test
+	bun run test
 
 # Run tests in watch mode
 test-watch:
-	npm run test:watch
+	bun run test:watch
 
 # Clean build artifacts
 clean:
